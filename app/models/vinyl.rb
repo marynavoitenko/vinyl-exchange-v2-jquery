@@ -6,6 +6,9 @@ class Vinyl < ApplicationRecord
   has_many :carts, through: :line_items
   belongs_to :user
 
+  validates :title, presence: true
+  validates :price, presence: true
+
   def self.for_sale
     Vinyl.where("for_sale = ?", true)
   end
