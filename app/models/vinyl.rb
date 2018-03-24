@@ -4,4 +4,6 @@ class Vinyl < ApplicationRecord
   has_many :genres, through: :vinyl_genres
   has_many :line_items
   has_many :carts, through: :line_items
+  belongs_to :user
+
 end
