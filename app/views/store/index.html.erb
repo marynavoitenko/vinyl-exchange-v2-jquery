@@ -1,7 +1,7 @@
 
 
 <% @vinyls.each do |vinyl| %>
-  <p><%= vinyl.title %> --- $<%= vinyl.price %></p>
+  <p><%= vinyl.artist.name %> --- <%= vinyl.title %> --- $<%= vinyl.price %></p>
 <% end %>
 
 <% @genres.each do |genre| %>
