@@ -6,4 +6,12 @@ class Vinyl < ApplicationRecord
   has_many :carts, through: :line_items
   belongs_to :user
 
+  def self.for_sale
+    Vinyl.where("for_sale = ?", true)
+  end
+
+  def self.my_vinyl
+    Vinyl.where("user_id = ?", current_user.id)
+  end
+
 end
