@@ -4,9 +4,11 @@ class VinylsController < ApplicationController
   end
 
   def new
+    @vinyl = Vinyl.new
   end
 
   def create
+    raise params.inspect
   end
 
   def edit
