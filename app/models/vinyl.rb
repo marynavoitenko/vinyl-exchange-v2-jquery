@@ -8,6 +8,7 @@ class Vinyl < ApplicationRecord
 
   validates :title, presence: true
   validates :price, presence: true
+  validates :inventory, presence: true  
 
   def self.for_sale
     Vinyl.where("for_sale = ?", true)
