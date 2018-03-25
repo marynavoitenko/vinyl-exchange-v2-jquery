@@ -13,8 +13,8 @@ class Vinyl < ApplicationRecord
     Vinyl.where("for_sale = ?", true)
   end
 
-  def self.my_vinyl
-    Vinyl.where("user_id = ?", current_user.id)
+  def self.my_vinyls(user)
+    Vinyl.where("user_id = ?", user.id)
   end
 
 end

@@ -1,2 +1,3 @@
-<h1>Vinyl#index</h1>
-<p>Find me in app/views/vinyl/index.html.erb</p>
+<% @vinyls.each do |vinyl| %>
+  <p><%= vinyl.artist.name %> --- <%= vinyl.title %> --- $<%= vinyl.price %></p>
+<% end %>

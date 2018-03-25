@@ -1,5 +1,6 @@
-class VinylController < ApplicationController
+class VinylsController < ApplicationController
   def index
+    @vinyls = Vinyl.my_vinyls(current_user)
   end
 
   def new
