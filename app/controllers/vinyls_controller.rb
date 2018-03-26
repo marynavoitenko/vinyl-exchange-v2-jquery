@@ -8,7 +8,12 @@ class VinylsController < ApplicationController
   end
 
   def create
-    raise params.inspect
+    vinyl = current_user.vinyls.create(vinyl_params)
+    redirect_to vinyl_path(vinyl)
+  end
+
+  def show
+    @vinyl = Vinyl.find(params[:id])
   end
 
   def edit
@@ -18,5 +23,11 @@ class VinylsController < ApplicationController
   end
 
   def delete
+  end
+
+  private
+
+  def vinyl_params
+    params.require(:vinyl).permit(:title, :price, :inventory, :artist_id, genre_ids:[], genres_attributes: [:name], artist_attributes: [:name])
   end
 end
