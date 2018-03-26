@@ -7,6 +7,7 @@ class Vinyl < ApplicationRecord
   belongs_to :user, required: false
 
   validates :title, presence: true
+  validates :title, uniqueness: true
   validates :price, presence: true
   validates :inventory, presence: true
 
