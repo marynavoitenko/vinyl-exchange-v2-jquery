@@ -1,6 +1,10 @@
 class VinylsController < ApplicationController
   def index
-    @vinyls = Vinyl.my_vinyls(current_user)
+    if params[:artist_id]
+      @vinyls = Vinyl.my_vinyls(current_user).where("artist_id = ?", params[:artist_id])
+    else
+      @vinyls = Vinyl.my_vinyls(current_user)
+    end
   end
 
   def new
