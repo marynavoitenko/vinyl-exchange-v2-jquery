@@ -8,8 +8,6 @@ class VinylsController < ApplicationController
   end
 
   def new
-    # display error messages
-
     if params[:artist_id] && !Artist.exists?(params[:artist_id])
       redirect_to store_path, alert: "Artist not found."
     elsif params[:artist_id] && Artist.exists?(params[:artist_id])
@@ -21,9 +19,13 @@ class VinylsController < ApplicationController
 
   def create
     @artist = Artist.find(params[:vinyl][:artist_id])
-    vinyl = current_user.vinyls.create(vinyl_params)
-    @artist.vinyls << vinyl
-    redirect_to vinyl_path(vinyl)
+    @vinyl = current_user.vinyls.new(vinyl_params)
+    @artist.vinyls << @vinyl
+    if @vinyl.save
+      redirect_to vinyl_path(vinyl)
+    else
+      render :new
+    end
   end
 
   def show

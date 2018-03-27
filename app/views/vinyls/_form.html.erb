@@ -1,4 +1,16 @@
 <%= form_for vinyl do |f| %>
+  <% if @vinyl.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@vinyl.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+    <ul>
+    <% @vinyl.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+
   <%= f.label "Title" %>
   <%= f.text_field :title %><br><br>
 
