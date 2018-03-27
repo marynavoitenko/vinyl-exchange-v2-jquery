@@ -1,7 +1,7 @@
 <%= form_for vinyl do |f| %>
   <% if @vinyl.errors.any? %>
   <div id="error_explanation">
-    <h2><%= pluralize(@vinyl.errors.count, "error") %> prohibited this post from being saved:</h2>
+    <h3><%= pluralize(@vinyl.errors.count, "error") %> prohibited this post from being saved:</h3>
 
     <ul>
     <% @vinyl.errors.full_messages.each do |msg| %>
