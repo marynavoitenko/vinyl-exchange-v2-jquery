@@ -20,7 +20,9 @@ class VinylsController < ApplicationController
   end
 
   def create
+    @artist = Artist.find(params[:vinyl][:artist_id])
     vinyl = current_user.vinyls.create(vinyl_params)
+    @artist.vinyls << vinyl
     redirect_to vinyl_path(vinyl)
   end
 
