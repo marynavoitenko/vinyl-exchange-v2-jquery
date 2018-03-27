@@ -1,3 +1,3 @@
 <% @vinyls.each do |vinyl| %>
-  <p><%= vinyl.artist.name %> --- <%= vinyl.title %> --- $<%= vinyl.price %></p>
+  <p><%=  link_to vinyl.artist.name, artist_vinyls_path(vinyl.artist)  %> --- <%= vinyl.title %> --- $<%= vinyl.price %></p>
 <% end %>
