@@ -1,1 +1,8 @@
-<%= @artist.inspect %>
+<h2><%= @artist.name %></h2>
+
+<%= button_to '+ New Vinyl', new_artist_vinyl_path(@artist, @vinyl) %>
+
+<p>Vinyls:</p>
+<% @artist.vinyls.each do |vinyl| %>
+  <div><%= vinyl.title %></div>
+<% end %>

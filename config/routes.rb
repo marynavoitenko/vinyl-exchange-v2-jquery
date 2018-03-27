@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :vinyls
 
   resources :artists, only: [:show] do
-    resources :vinyls, only: [:show, :index]
+    resources :vinyls, only: [:show, :index, :new]
   end
 
   devise_for :users
