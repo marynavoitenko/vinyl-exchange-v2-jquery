@@ -1,2 +1,17 @@
-<%= @vinyl.title %>
-<%= @vinyl.inspect %>
+<table>
+  <thead>
+    <tr>
+      <th>Artist</th>
+      <th>Title</th>
+      <th>Price</th>
+      <th>Inventory</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <%= render partial: 'vinyl', locals: {vinyl: @vinyl} %>
+
+  </tbody>
+</table>
