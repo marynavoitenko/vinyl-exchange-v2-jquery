@@ -1,9 +1,9 @@
 class VinylsController < ApplicationController
   def index
     if params[:artist_id]
-      @vinyls = Vinyl.my_vinyls(current_user).where("artist_id = ?", params[:artist_id])
+      @vinyls = Vinyl.all.where("artist_id = ?", params[:artist_id])
     else
-      @vinyls = Vinyl.my_vinyls(current_user)
+      @vinyls = Vinyl.all
     end
   end
 
