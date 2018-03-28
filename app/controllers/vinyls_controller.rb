@@ -18,11 +18,11 @@ class VinylsController < ApplicationController
   end
 
   def create
+    @vinyl = current_user.vinyls.new(vinyl_params)
     if params[:artist_id]
       @artist = Artist.find(params[:vinyl][:artist_id])
+      @vinyl.artist = @artist
     end
-    @vinyl = current_user.vinyls.new(vinyl_params)
-    @vinyl.artist = @artist
     if @vinyl.save
       redirect_to vinyl_path(vinyl)
     else
@@ -35,12 +35,23 @@ class VinylsController < ApplicationController
   end
 
   def edit
-    @vinyl = Vinyl.find(params[:id])
+    if !@vinyl = Vinyl.find_by(id: params[:id])
+      redirect_to vinyls_path
+    end
   end
 
   def update
-    vinyl = current_user.vinyls.update(vinyl_params)
-    redirect_to vinyl_path(vinyl)
+    @vinyl = current_user.vinyls.find(params[:id])
+
+    if @vinyl.update(vinyl_params)
+      if params[:artist_id]
+        @artist = Artist.find(params[:vinyl][:artist_id])
+        @vinyl.artist = @artist
+      end
+      redirect_to vinyl_path(@vinyl)
+    else
+      render :edit
+    end
   end
 
   def delete
