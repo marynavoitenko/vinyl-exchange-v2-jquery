@@ -10,4 +10,7 @@ Rails.application.routes.draw do
   root 'store#index', as: 'store'
 
   get '/my_vinyls', to: 'vinyls#my_vinyls', as: 'my_vinyls'
+
+  resources :line_items, only: [:create]
+  resources :carts, only: [:show]
 end
