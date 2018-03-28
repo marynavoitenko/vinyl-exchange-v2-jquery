@@ -1,7 +1,20 @@
+<table>
+  <thead>
+    <tr>
+      <th>Artist</th>
+      <th>Title</th>
+      <th>Price</th>
+      <th>Inventory</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
 
-<% @vinyls.each do |vinyl| %>
-  <p><%= vinyl.artist.name %> --- <%= vinyl.title %> --- $<%= vinyl.price %> --- Qty: <%= vinyl.inventory %></p>
-<% end %>
+    <%= render :partial => "vinyls/vinyl", :collection => @vinyls %>
+
+  </tbody>
+</table>
 
 <% @genres.each do |genre| %>
   <%= genre.name %>

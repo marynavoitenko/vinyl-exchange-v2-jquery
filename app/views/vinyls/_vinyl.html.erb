@@ -1,0 +1,14 @@
+<tr>
+  <th><%=  link_to vinyl.artist.name, artist_vinyls_path(vinyl.artist)  %></th>
+  <th><%=  link_to vinyl.title, vinyl_path(vinyl)  %></th>
+  <th>$<%= vinyl.price %></th>
+  <th><%= vinyl.inventory %></th>
+  <th>
+    <% if current_user.vinyls.include?(vinyl) %>
+      <%= link_to "Edit", edit_vinyl_path(vinyl) %></th>
+      <th><%= link_to "Delete", vinyl, method: :delete, data: { confirm: "Are you sure?" }%>
+    <% else %>
+      <%= link_to "Add to Cart", store_path %>
+    <% end %>
+  </th>
+</tr>

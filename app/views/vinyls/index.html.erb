@@ -1,3 +1,17 @@
-<% @vinyls.each do |vinyl| %>
-  <p><%=  link_to vinyl.artist.name, artist_vinyls_path(vinyl.artist)  %> --- <%= vinyl.title %> --- $<%= vinyl.price %></p>
-<% end %>
+<table>
+  <thead>
+    <tr>
+      <th>Artist</th>
+      <th>Title</th>
+      <th>Price</th>
+      <th>Inventory</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <%= render :partial => "vinyl", :collection => @vinyls %>
+
+  </tbody>
+</table>
