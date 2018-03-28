@@ -44,9 +44,10 @@ class VinylsController < ApplicationController
     @vinyl = current_user.vinyls.find(params[:id])
 
     if @vinyl.update(vinyl_params)
-      if params[:artist_id]
+      if params[:vinyl][:artist_id]
         @artist = Artist.find(params[:vinyl][:artist_id])
         @vinyl.artist = @artist
+        @vinyl.save
       end
       redirect_to vinyl_path(@vinyl)
     else
