@@ -24,7 +24,7 @@ class VinylsController < ApplicationController
       @vinyl.artist = @artist
     end
     if @vinyl.save
-      redirect_to vinyl_path(vinyl)
+      redirect_to vinyl_path(@vinyl)
     else
       render :new
     end
@@ -55,7 +55,9 @@ class VinylsController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
+    Vinyl.find(params[:id]).destroy
+    redirect_to vinyls_path
   end
 
   private
