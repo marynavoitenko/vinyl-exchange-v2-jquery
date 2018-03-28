@@ -18,9 +18,11 @@ class VinylsController < ApplicationController
   end
 
   def create
-    @artist = Artist.find(params[:vinyl][:artist_id])
+    if params[:artist_id]
+      @artist = Artist.find(params[:vinyl][:artist_id])
+    end
     @vinyl = current_user.vinyls.new(vinyl_params)
-    @artist.vinyls << @vinyl
+    @vinyl.artist = @artist
     if @vinyl.save
       redirect_to vinyl_path(vinyl)
     else
