@@ -28,10 +28,12 @@
     <%= genres_fields.text_field :name %>
   <% end %><br><br>
 
-  <%= f.label "Price" %>
+  <%= f.label :price, "Price" %>
   <%= f.text_field :price %><br><br>
-  <%= f.label "Inventory" %>
+  <%= f.label :inventory, "Inventory" %>
   <%= f.text_field :inventory %><br><br>
+  <%= f.label :for_sale, "For Sale" %>
+  <%= f.check_box :for_sale %><br><br>
 
   <%= f.submit %>
 <% end %>
