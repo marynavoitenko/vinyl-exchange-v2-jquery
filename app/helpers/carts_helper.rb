@@ -1,4 +1,4 @@
-module LineItemsHelper
+module CartsHelper
   def current_cart
     if cart = current_user.carts.find { |c| c.status != "submitted" }
       @cart = cart

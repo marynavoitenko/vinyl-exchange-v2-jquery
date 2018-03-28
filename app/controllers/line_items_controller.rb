@@ -1,6 +1,4 @@
 class LineItemsController < ApplicationController
-  include LineItemsHelper
-
   def create
     current_cart.add_item(params[:vinyl_id])
     if current_cart.save
