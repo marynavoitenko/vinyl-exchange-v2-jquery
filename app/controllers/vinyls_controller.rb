@@ -60,6 +60,11 @@ class VinylsController < ApplicationController
     redirect_to vinyls_path
   end
 
+  def my_vinyls
+    @vinyls = Vinyl.my_vinyls(current_user)
+    render :index
+  end
+
   private
 
   def vinyl_params

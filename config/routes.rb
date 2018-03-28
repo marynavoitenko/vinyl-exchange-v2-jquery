@@ -8,4 +8,6 @@ Rails.application.routes.draw do
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'store#index', as: 'store'
+
+  get '/my_vinyls', to: 'vinyls#my_vinyls', as: 'my_vinyls'
 end
