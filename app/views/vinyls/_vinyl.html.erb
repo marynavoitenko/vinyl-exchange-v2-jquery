@@ -1,5 +1,5 @@
 <tr>
-  <th><%=  link_to vinyl.artist.name, artist_vinyls_path(vinyl.artist)  %></th>
+  <th><%=  link_to vinyl.artist.name, artist_path(vinyl.artist)  %></th>
   <th><%=  link_to vinyl.title, vinyl_path(vinyl)  %></th>
   <th>$<%= vinyl.price %></th>
   <th><%= vinyl.inventory %></th>
