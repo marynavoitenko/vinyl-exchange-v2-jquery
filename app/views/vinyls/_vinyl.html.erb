@@ -3,6 +3,7 @@
   <th><%=  link_to vinyl.title, vinyl_path(vinyl)  %></th>
   <th>$<%= vinyl.price %></th>
   <th><%= vinyl.inventory %></th>
+  <th><%= vinyl.for_sale_display %></th>
   <th>
     <% if current_user.vinyls.include?(vinyl) %>
       <%= link_to "Edit", edit_vinyl_path(vinyl) %></th>

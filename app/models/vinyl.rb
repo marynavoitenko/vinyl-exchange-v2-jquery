@@ -25,6 +25,10 @@ class Vinyl < ApplicationRecord
     Vinyl.where("user_id = ?", user.id)
   end
 
+  def for_sale_display
+    self.for_sale ? "yes" : "no"
+  end
+
   def genres_attributes=(genres_attributes)
     genres_attributes.values.each do |genre_attributes|
       genre = Genre.find_or_create_by(genre_attributes)
