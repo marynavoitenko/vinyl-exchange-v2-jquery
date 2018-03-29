@@ -1,11 +1,7 @@
 <h1>Your Cart</h1>
 
-<% if notice %>
-  <p><%= notice %></p>
-<% end %>
-
 <% @cart.line_items.each do |line_item| %>
-  <p><%= link_to line_item.vinyl.title, vinyl_path(line_item.vinyl) %> | $<%= line_item.vinyl.price %> | Quantity: <%= line_item.quantity %></p>
+  <p><%= link_to line_item.vinyl.artist.name %> | <%= link_to line_item.vinyl.title, vinyl_path(line_item.vinyl) %> | $<%= line_item.vinyl.price %> | Quantity: <%= line_item.quantity %></p>
 <% end %>
 
 <p>Order total: <strong>$<%= current_cart.total %></strong> </p>
