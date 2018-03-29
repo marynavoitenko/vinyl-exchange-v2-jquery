@@ -18,11 +18,13 @@ class VinylsController < ApplicationController
   end
 
   def create
-    if params[:vinyl][:artist_id]
-      @artist = Artist.find(params[:vinyl][:artist_id])
-    end
     @vinyl = current_user.vinyls.new(vinyl_params)
-    @vinyl.artist = @artist
+
+    if !params[:vinyl][:artist_id].empty?
+      @artist = Artist.find(params[:vinyl][:artist_id])
+      @vinyl.artist = @artist
+    end
+
     if @vinyl.save
       redirect_to vinyl_path(@vinyl)
     else
@@ -68,6 +70,6 @@ class VinylsController < ApplicationController
   private
 
   def vinyl_params
-    params.require(:vinyl).permit(:title, :price, :inventory, :for_sale, :artist_id, genre_ids:[], genres_attributes: [:name], artist_attributes: [:name])
+    params.require(:vinyl).permit(:title, :price, :inventory, :for_sale, genre_ids:[], genres_attributes: [:name], artist_attributes: [:name])
   end
 end
