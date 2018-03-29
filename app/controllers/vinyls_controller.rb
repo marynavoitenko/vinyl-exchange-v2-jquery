@@ -57,7 +57,7 @@ class VinylsController < ApplicationController
 
   def destroy
     Vinyl.find(params[:id]).destroy
-    redirect_to vinyls_path
+    redirect_to my_vinyls_path
   end
 
   def my_vinyls
