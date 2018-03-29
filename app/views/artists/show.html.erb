@@ -1,8 +1,20 @@
-<h2><%= @artist.name %></h2>
+<table>
+  <thead>
+    <tr>
+      <th>Artist</th>
+      <th>Title</th>
+      <th>Price</th>
+      <th>Inventory</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
 
-<%= link_to '+ New Vinyl', new_artist_vinyl_path(@artist, @vinyl) %>
+    <%= render :partial => "vinyls/vinyl", :collection => @artist.vinyls %>
 
-<p>Vinyls:</p>
-<% @artist.vinyls.each do |vinyl| %>
-  <div><%= vinyl.title %></div>
-<% end %>
+  </tbody>
+</table>
+
+<br>
+<%= link_to 'Add New Vinyl', new_artist_vinyl_path(@artist, @artist.vinyls.build) %>
