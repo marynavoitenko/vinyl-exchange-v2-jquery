@@ -13,6 +13,7 @@ class Cart < ApplicationRecord
       line_item = self.line_items.build(vinyl_id: item_id)
     end
     line_item
+    update_inventory(line_item.vinyl_id)
   end
 
   def update_inventory(vinyl_id)
