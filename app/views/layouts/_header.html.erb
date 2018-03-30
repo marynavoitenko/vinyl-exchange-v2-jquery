@@ -17,7 +17,9 @@
             <li><%= link_to "Sign in", new_user_session_path %></li>
           <% end %>
         </ul>
-        <p id="user-email">Signed in as <%= current_user.email %></p>
+        <% if user_signed_in? %>
+          <p id="user-email">Signed in as <%= current_user.email %></p>
+        <% end %>
     </nav>
   </div>
 </header>
