@@ -1,17 +1,23 @@
-<nav class="">
-    <ul>
-        <li><%= link_to "Store Home", store_path %></li>
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="container">
 
-        <% if user_signed_in? %>
-          <li><%= link_to "My Vinyls", my_vinyls_path %></li>
-          <% if current_cart.persisted? %>
-            <li><%= link_to "Cart", cart_path(current_cart) %></li>
+     <nav>
+        <ul class="nav navbar-nav navbar-left">
+          <li><%= link_to "Store Home", store_path %></li>
+
+          <% if user_signed_in? %>
+            <li><%= link_to "My Vinyls", my_vinyls_path %></li>
+            <% if current_cart.persisted? %>
+              <li><%= link_to "Cart", cart_path(current_cart) %></li>
+            <% end %>
+            <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+
+          <% else %>
+            <li><%= link_to "Sign up", new_user_registration_path %></li>
+            <li><%= link_to "Sign in", new_user_session_path %></li>
           <% end %>
-          <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
-          <h4>Signed in as <%= current_user.email %></h4>
-        <% else %>
-          <li><%= link_to "Sign up", new_user_registration_path %></li>
-          <li><%= link_to "Sign in", new_user_session_path %></li>
-        <% end %>
-    </ul>
-</nav>
+        </ul>
+        <p id="user-email">Signed in as <%= current_user.email %></p>
+    </nav>
+  </div>
+</header>
