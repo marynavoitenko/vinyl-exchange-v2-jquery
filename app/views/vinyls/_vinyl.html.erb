@@ -9,7 +9,7 @@
       <%= link_to "Edit", edit_vinyl_path(vinyl) %></th>
       <th scope="row"><%= link_to "Delete", vinyl, method: :delete, data: { confirm: "Are you sure?" }%>
     <% else %>
-      <%= button_to "Add to Cart", line_items_path(vinyl_id: vinyl) %>
+      <%= button_to "Add to Cart", line_items_path(vinyl_id: vinyl), class: 'btn btn-primary' %>
       <th scope="row"></th>
     <% end %>
   </th>
