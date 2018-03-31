@@ -1,21 +1,8 @@
-<table>
-  <thead>
-    <tr>
-      <th>Artist</th>
-      <th>Title</th>
-      <th>Price</th>
-      <th>Inventory</th>
-      <th>For Sale</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-
+<% content_for :table_content do %>
     <%= render :partial => "vinyls/vinyl", :collection => @vinyls %>
+<% end %>
 
-  </tbody>
-</table>
+<%= render 'table' %>
 
 <% @genres.each do |genre| %>
   <%= genre.name %>
