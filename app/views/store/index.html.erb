@@ -2,7 +2,7 @@
     <%= render :partial => "vinyls/vinyl", :collection => @vinyls %>
 <% end %>
 
-<%= render 'table' %>
+<%= render 'layouts/table' %>
 
 <% @genres.each do |genre| %>
   <%= genre.name %>
