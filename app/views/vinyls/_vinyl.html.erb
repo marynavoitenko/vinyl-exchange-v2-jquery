@@ -6,8 +6,8 @@
   <th scope="row"><%= vinyl.for_sale_display %></th>
   <th scope="row">
     <% if current_user.vinyls.include?(vinyl) %>
-      <%= link_to "Edit", edit_vinyl_path(vinyl) %></th>
-      <th scope="row"><%= link_to "Delete", vinyl, method: :delete, data: { confirm: "Are you sure?" }%>
+      <%= link_to "Edit", edit_vinyl_path(vinyl), class: 'btn btn-outline-secondary' %></th>
+      <th scope="row"><%= link_to "Delete", vinyl, method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-outline-secondary' %>
     <% else %>
       <%= button_to "Add to Cart", line_items_path(vinyl_id: vinyl), class: 'btn btn-primary' %>
       <th scope="row"></th>
