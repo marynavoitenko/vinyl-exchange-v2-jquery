@@ -1,15 +1,16 @@
 <tr>
-  <th><%=  link_to vinyl.artist.name, artist_path(vinyl.artist)  %></th>
-  <th><%=  link_to vinyl.title, vinyl_path(vinyl)  %></th>
-  <th>$<%= vinyl.price %></th>
-  <th><%= vinyl.inventory %></th>
-  <th><%= vinyl.for_sale_display %></th>
-  <th>
+  <th scope="row"><%=  link_to vinyl.artist.name, artist_path(vinyl.artist)  %></th>
+  <th scope="row"><%=  link_to vinyl.title, vinyl_path(vinyl)  %></th>
+  <th scope="row">$<%= vinyl.price %></th>
+  <th scope="row"><%= vinyl.inventory %></th>
+  <th scope="row"><%= vinyl.for_sale_display %></th>
+  <th scope="row">
     <% if current_user.vinyls.include?(vinyl) %>
       <%= link_to "Edit", edit_vinyl_path(vinyl) %></th>
-      <th><%= link_to "Delete", vinyl, method: :delete, data: { confirm: "Are you sure?" }%>
+      <th scope="row"><%= link_to "Delete", vinyl, method: :delete, data: { confirm: "Are you sure?" }%>
     <% else %>
       <%= button_to "Add to Cart", line_items_path(vinyl_id: vinyl) %>
+      <th scope="row"></th>
     <% end %>
   </th>
 </tr>
