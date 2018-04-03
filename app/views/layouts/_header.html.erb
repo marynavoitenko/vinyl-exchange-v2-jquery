@@ -2,8 +2,8 @@
   <div class="container">
 
      <nav>
-       <p id="logo">Vinyl Exchange</p>
         <ul class="nav navbar-nav navbar-left">
+          <li id="logo"><%= link_to "Vinyl Exchange", store_path %></li>
           <li><%= link_to "Store Home", store_path %></li>
 
           <% if user_signed_in? %>
