@@ -24,7 +24,7 @@ class VinylsController < ApplicationController
       @artist = Artist.find(params[:vinyl][:artist_id])
       @vinyl.artist = @artist
     end
-
+    
     if @vinyl.save
       redirect_to vinyl_path(@vinyl)
     else

@@ -2,7 +2,7 @@
   <%= form_for vinyl do |f| %>
     <% if @vinyl.errors.any? %>
     <div id="error_explanation">
-      <h3>The form contains <%= pluralize(@vinyl.errors.count, "error") %>:</h3>
+      <h4>The form contains <%= pluralize(@vinyl.errors.count, "error") %>:</h4>
 
       <ul>
       <% @vinyl.errors.full_messages.each do |msg| %>
@@ -14,7 +14,7 @@
 
   <div class="form-group">
     <%= f.label "Title" %>
-    <%= f.text_field :title %><br><br>
+    <%= f.text_field :title %>
   </div>
 
   <div class="form-group">
