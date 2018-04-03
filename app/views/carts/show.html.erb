@@ -1,7 +1,26 @@
 <h1>Your Cart</h1>
 
-<% @cart.line_items.each do |line_item| %>
-  <p><%= link_to line_item.vinyl.artist.name %> | <%= link_to line_item.vinyl.title, vinyl_path(line_item.vinyl) %> | $<%= line_item.vinyl.price %> | Quantity: <%= line_item.quantity %></p>
-<% end %>
+<div class="container">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Artist</th>
+        <th scope="col">Title</th>
+        <th scope="col">Price</th>
+        <th scope="col">Qty</th>
+      </tr>
+    </thead
+    <tbody>
+      <% @cart.line_items.each do |line_item| %>
+        <tr>
+          <th scope="col"><%= link_to line_item.vinyl.artist.name %></th>
+          <th scope="col"><%= link_to line_item.vinyl.title, vinyl_path(line_item.vinyl) %></th>
+          <th scope="col">$<%= line_item.vinyl.price %></th>
+          <th scope="col"><%= line_item.quantity %></th>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
-<p>Order total: <strong>$<%= current_cart.total %></strong> </p>
+<h3>Order total: <strong>$<%= current_cart.total %></strong> </h3>
