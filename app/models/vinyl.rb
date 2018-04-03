@@ -29,6 +29,10 @@ class Vinyl < ApplicationRecord
     self.for_sale ? "yes" : "no"
   end
 
+  def in_stock
+    self.inventory > 0
+  end
+
   def genres_attributes=(genres_attributes)
     genres_attributes.values.each do |genre_attributes|
       genre = Genre.find_or_create_by(genre_attributes)
