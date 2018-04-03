@@ -5,4 +5,4 @@
 <%= render 'layouts/table' %>
 
 <br>
-<%= link_to 'Add New Vinyl', new_artist_vinyl_path(@artist, @artist.vinyls.build) %>
+<%= link_to 'Add New Vinyl', new_artist_vinyl_path(@artist, @artist.vinyls.build), class: 'btn btn-primary' %>
