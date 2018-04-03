@@ -1,15 +1,16 @@
-<%= form_for vinyl do |f| %>
-  <% if @vinyl.errors.any? %>
-  <div id="error_explanation">
-    <h3>The form contains <%= pluralize(@vinyl.errors.count, "error") %>:</h3>
+<div class="container">
+  <%= form_for vinyl do |f| %>
+    <% if @vinyl.errors.any? %>
+    <div id="error_explanation">
+      <h3>The form contains <%= pluralize(@vinyl.errors.count, "error") %>:</h3>
 
-    <ul>
-    <% @vinyl.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
+      <ul>
+      <% @vinyl.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
     <% end %>
-    </ul>
-  </div>
-  <% end %>
 
   <div class="form-group">
     <%= f.label "Title" %>
