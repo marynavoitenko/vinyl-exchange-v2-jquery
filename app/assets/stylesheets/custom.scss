@@ -8,13 +8,24 @@ body {
   padding-top: 60px;
 }
 
+textarea:focus, input:focus{
+    outline: none;
+}
+
+/* error messages */
+
+
 #error_explanation {
   color: red;
 }
 
-// .field_with_errors input {
-//   border: 1px solid red;
-// }
+.field_with_errors input {
+  border: 1px solid red;
+}
+
+.field_with_errors label {
+  color: red;
+}
 
 #user-email {
   text-align: right;
@@ -23,14 +34,13 @@ body {
   padding-top: 15px;
 }
 
-#flash_error, #flash_alert{
-  color: #dc3545;
+#flash_error, #flash_alert {
+  color: red;
 }
 
-textarea:focus, input:focus{
-    outline: none;
+#flash_notice {
+  color: green;
 }
-
 
 /* typography */
 
