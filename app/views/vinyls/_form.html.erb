@@ -1,7 +1,7 @@
 <div class="container">
   <%= form_for vinyl do |f| %>
     <% if @vinyl.errors.any? %>
-    <div id="error_explanation">
+    <div class="alert alert-danger">
       <h4>The form contains <%= pluralize(@vinyl.errors.count, "error") %>:</h4>
 
       <ul>
