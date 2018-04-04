@@ -8,4 +8,28 @@ class LineItemsController < ApplicationController
       redirect_to store_path, {alert: 'Item was not added. Please check inventory.'}
     end
   end
+
+  def update
+    @lineitem = LineItem.find(params[:id])
+    qty_update = params[:line_item][:quantity].to_i - @lineitem.quantity
+
+    if @lineitem.vinyl.inventory >= qty_update
+
+      if @lineitem.update(lineitem_params)
+        current_cart.update_inventory(@lineitem.vinyl.id, qty_update)
+        redirect_to cart_path(current_cart), {notice: 'Item quantity was updated!'}
+      else
+        redirect_to store_path, {alert: 'Item quantity was not updated. Please check inventory.'}
+      end
+    else
+      redirect_to cart_path(current_cart), {alert: 'Item quantity was not updated. Please check inventory.'}
+    end
+  end
+
+  private
+
+  def lineitem_params
+    params.require(:line_item).permit(:quantity)
+  end
+
 end
