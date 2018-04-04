@@ -10,14 +10,8 @@ class Cart < ApplicationRecord
     else
       line_item = self.line_items.build(vinyl_id: vinyl_id)
     end
-    update_inventory(line_item.vinyl_id, line_item.quantity) if line_item.vinyl.in_stock
-  end
-
-  def update_inventory(vinyl_id, qty=1)
     vinyl = Vinyl.find(vinyl_id)
-    vinyl.inventory -= qty if qty <= vinyl.inventory
-    vinyl.for_sale = false if vinyl.inventory < 1
-    vinyl.save
+    vinyl.update_inventory(line_item.quantity) if line_item.vinyl.in_stock
   end
 
 
