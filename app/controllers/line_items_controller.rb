@@ -10,13 +10,16 @@ class LineItemsController < ApplicationController
   end
 
   def update
-    @lineitem = LineItem.find(params[:id])
-    qty_update = params[:line_item][:quantity].to_i - @lineitem.quantity
+    lineitem = LineItem.find(params[:id])
+    vinyl = lineitem.vinyl
+    new_qty = params[:line_item][:quantity].to_i
 
-    if @lineitem.vinyl.inventory >= qty_update
+    qty_update = new_qty - lineitem.quantity
 
-      if @lineitem.update(lineitem_params)
-        @lineitem.vinyl.update_inventory(qty_update)
+    if vinyl.inventory >= qty_update
+
+      if lineitem.update(lineitem_params)
+        vinyl.update_inventory(qty_update)
         redirect_to cart_path(current_cart), {notice: 'Item quantity was updated!'}
       else
         redirect_to store_path, {alert: 'Item quantity was not updated. Please check inventory.'}
