@@ -49,7 +49,8 @@ Now run the application
 rails s
 ```
 
-Application includes Facebook Login. To make it work on localhost, you need to generate a self-signed SSL certificate
+### Facebook Login
+To make it work on localhost, you need to generate a self-signed SSL certificate
 
 Make sure you're inside the app directory (or move the files there later)
 
