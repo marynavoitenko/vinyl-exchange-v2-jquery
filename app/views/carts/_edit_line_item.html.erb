@@ -1,9 +1,0 @@
-<tr>
-  <th scope="col"><%= link_to line_item.vinyl.artist.name %></th>
-  <th scope="col"><%= link_to line_item.vinyl.title, vinyl_path(line_item.vinyl) %></th>
-  <th scope="col">$<%= line_item.vinyl.price %></th>
-  <%= form_for line_item do |f| %>
-    <th scope="col"><%= f.text_field :quantity %></th>
-    <th scope="col"><%= f.submit "Save", { class: 'btn btn-primary' } %></th>
-  <% end %>
-</tr>

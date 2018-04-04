@@ -1,17 +1,5 @@
-<h1>Your Cart</h1>
+<%= render :partial => 'cart_table' %>
 
-<div class="container">
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th scope="col">Artist</th>
-        <th scope="col">Title</th>
-        <th scope="col">Price</th>
-        <th scope="col">Qty</th>
-        <th scope="col">Edit Qty</th>
-      </tr>
-    </thead>
-    <tbody>
       <% @cart.line_items.each do |line_item| %>
         <tr>
           <th scope="col"><%= link_to line_item.vinyl.artist.name %></th>
@@ -26,6 +14,3 @@
     </tbody>
   </table>
 </div>
-
-
-<%= render :partial => 'cart', locals: {line_items: @cart.line_items} %>
