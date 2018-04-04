@@ -1,0 +1,30 @@
+<h1>Your Cart</h1>
+
+<div class="container">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Artist</th>
+        <th scope="col">Title</th>
+        <th scope="col">Price</th>
+        <th scope="col">Qty</th>
+        <th scope="col">Edit Qty</th>
+      </tr>
+    </thead
+    <tbody>
+      <% @cart.line_items.each do |line_item| %>
+        <tr>
+          <th scope="col"><%= link_to line_item.vinyl.artist.name %></th>
+          <th scope="col"><%= link_to line_item.vinyl.title, vinyl_path(line_item.vinyl) %></th>
+          <th scope="col">$<%= line_item.vinyl.price %></th>
+          <%= form_for line_item do |f| %>
+            <th scope="col"><%= f.text_field :quantity %></th>
+            <th scope="col"><%= f.submit "Save", { class: 'btn btn-primary' } %></th>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<h3>Order total: <strong>$<%= current_cart.total %></strong> </h3>
