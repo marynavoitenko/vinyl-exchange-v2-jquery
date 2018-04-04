@@ -9,13 +9,13 @@ These instructions will get you a copy of the project up and running on your loc
 ## Prerequisites
 What things you need to install the application
 
-* Make sure Ruby is installed
+Make sure Ruby is installed
 
 ```
 ruby -v
 ```
 
-* Make sure Rails is installed
+Make sure Rails is installed
 
 ```
 rails -v
@@ -24,32 +24,32 @@ rails -v
 ## Installing:
 A step by step guide how to get a development env running
 
-1. Clone this repo
+Clone this repo
 
 ```
 git clone https://github.com/marynavoitenko/vinyl-exchange.git
 ```
 
-2. Install all dependencies
+Install all dependencies
 
 ```
 bundle install
 ```
 
-3. Create db and migrate schema
+Create db and migrate schema
 
 ```
 rake db:create
 rake db:migrate
 ```
 
-4. Now run the application
+Now run the application
 
 ```
 rails s
 ```
 
-* Application includes Facebook Login. To make it work on localhost, you need to generate a self-signed SSL certificate
+Application includes Facebook Login. To make it work on localhost, you need to generate a self-signed SSL certificate
 
 Make sure you're inside the app directory (or move the files there later)
 
