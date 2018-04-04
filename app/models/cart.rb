@@ -16,8 +16,6 @@ class Cart < ApplicationRecord
     line_item.save
   end
 
-
-
   def update_inventory(vinyl_id, qty=1)
     vinyl = Vinyl.find(vinyl_id)
     vinyl.inventory -= qty if qty <= vinyl.inventory
