@@ -17,9 +17,8 @@ class LineItemsController < ApplicationController
     qty_update = new_qty - lineitem.quantity
 
     if vinyl.inventory >= qty_update
-
       if lineitem.update(lineitem_params)
-        vinyl.update_inventory(qty_update)
+        current_cart.update_inventory(vinyl.id, qty_update)
         redirect_to cart_path(current_cart), {notice: 'Item quantity was updated!'}
       else
         redirect_to store_path, {alert: 'Item quantity was not updated. Please check inventory.'}

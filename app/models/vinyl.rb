@@ -31,12 +31,6 @@ class Vinyl < ApplicationRecord
     self.inventory > 0
   end
 
-  def update_inventory(qty=1)
-    self.inventory -= qty if qty <= self.inventory
-    self.for_sale = false if self.inventory < 1
-    self.save
-  end
-
   def genres_attributes=(genres_attributes)
     genres_attributes.values.each do |genre_attributes|
       genre = Genre.find_or_create_by(genre_attributes)
