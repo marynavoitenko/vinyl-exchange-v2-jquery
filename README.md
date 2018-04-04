@@ -1,4 +1,4 @@
-# Vinyl Exchange
+# VINYL EXCHANGE
 
 ## About
 This app is a vinyl exchange platform. Add your vinyls for sale and every other user will be able to buy them. Or buy the vinyls that someone else has submitted.
