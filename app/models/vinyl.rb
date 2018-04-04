@@ -16,7 +16,7 @@ class Vinyl < ApplicationRecord
   end
 
   def self.for_sale_exclude_current_user(user)
-    Vinyl.where("for_sale =? AND user_id != ? AND inventory > ?", true, 1, 0)
+    Vinyl.where.not("user_id = ?", user.id) & Vinyl.for_sale & Vinyl.in_stock
   end
 
   def self.my_vinyls(user)
@@ -27,8 +27,8 @@ class Vinyl < ApplicationRecord
     self.for_sale ? "yes" : "no"
   end
 
-  def in_stock
-    self.inventory > 0
+  def self.in_stock
+    Vinyl.where("inventory > ?", 0)
   end
 
   def genres_attributes=(genres_attributes)
