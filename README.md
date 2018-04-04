@@ -65,11 +65,11 @@ To run rails server using a generated self-signed SSL certificate
 rails s -b 'ssl://localhost:3000?key=localhost.key&cert=localhost.crt'
 ```
 
-Thanks to the great resource about [self-signed SSL certificate on localhost](https://www.devmynd.com/blog/rails-local-development-https-using-self-signed-ssl-certificate/) from Matt DuBois
+Thanks to the great resource about [self-signed SSL certificate on localhost](https://github.com/marynavoitenko/vinyl-exchange) from Matt DuBois
 
 ## CONTRIBUTING
-Bug reports and pull requests are welcome on GitHub at https://github.com/marynavoitenko/test-case-library-sinatra. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/marynavoitenko/vinyl-exchange. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## LICENSE
 
-[The MIT License (MIT)](https://github.com/marynavoitenko/test-case-library-sinatra/blob/master/LICENSE.md)
+[The MIT License (MIT)](https://github.com/marynavoitenko/vinyl-exchange/blob/master/LICENSE.md)
