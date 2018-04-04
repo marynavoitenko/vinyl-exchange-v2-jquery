@@ -11,8 +11,6 @@ class Vinyl < ApplicationRecord
   validates :price, presence: true
   validates :inventory, presence: true
 
-  accepts_nested_attributes_for :genres, :artist
-
   def self.for_sale
     Vinyl.where("for_sale = ?", true)
   end
