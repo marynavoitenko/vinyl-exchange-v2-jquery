@@ -18,7 +18,7 @@
           <th scope="col"><%= link_to line_item.vinyl.title, vinyl_path(line_item.vinyl) %></th>
           <th scope="col">$<%= line_item.vinyl.price %></th>
           <th scope="col"><%= line_item.quantity %></th>
-          <th scope="col"><%= link_to "Edit", store_path, class: 'btn btn-outline-secondary' %></th>
+          <th scope="col"><%= link_to "Edit", edit_cart_path(current_cart), class: 'btn btn-outline-secondary' %></th>
         </tr>
       <% end %>
     </tbody>
