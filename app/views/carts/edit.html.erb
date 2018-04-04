@@ -10,7 +10,7 @@
         <th scope="col">Qty</th>
         <th scope="col">Edit Qty</th>
       </tr>
-    </thead
+    </thead>
     <tbody>
       <% @cart.line_items.each do |line_item| %>
         <tr>
@@ -27,4 +27,5 @@
   </table>
 </div>
 
-<h3>Order total: <strong>$<%= current_cart.total %></strong> </h3>
+
+<%= render :partial => 'cart', locals: {line_items: @cart.line_items} %>
