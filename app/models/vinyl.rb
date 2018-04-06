@@ -39,7 +39,11 @@ class Vinyl < ApplicationRecord
   end
 
   def artist_attributes=(artist_attributes)
-    artist = Artist.find_or_create_by(artist_attributes)
+    if artist_id
+      artist = Artist.find(artist_id)
+    else
+      artist = Artist.find_or_create_by(artist_attributes)
+    end  
     self.artist = artist
   end
 
