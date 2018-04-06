@@ -8,6 +8,11 @@ class LineItemsController < ApplicationController
     end
   end
 
+  def edit
+    @line_item = LineItem.find(params[:id])
+    render 'carts/edit'
+  end
+
   def update
     lineitem = LineItem.find(params[:id])
     vinyl = lineitem.vinyl
