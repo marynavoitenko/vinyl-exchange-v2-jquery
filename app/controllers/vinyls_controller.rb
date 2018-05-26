@@ -1,11 +1,15 @@
 class VinylsController < ApplicationController
   def index
     if params[:artist_id]
-      vinyls = Vinyl.all.where("artist_id = ?", params[:artist_id])
+      @vinyls = Vinyl.all.where("artist_id = ?", params[:artist_id])
     else
-      vinyls = Vinyl.all
+      @vinyls = Vinyl.all
     end
-    render json: vinyls
+
+    respond_to do |f|
+      f.html { render :index }
+      f.json { render json: @vinyls }
+    end
   end
 
   def new
