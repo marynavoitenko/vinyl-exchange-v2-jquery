@@ -11,7 +11,7 @@ $(function() {
         let base_url = 'http://localhost:3000';
         $.each(data, function( index, value ) {
             div_html += '<tr>';
-            div_html += '<th scope="row">' + value['artist_id'] +'</th>';
+            div_html += `<th scope="row"><a href="${base_url}/artists/${value['artist']['id']}">${value['artist']['name']}</a></th>`;
             div_html += `<th scope="row"><a href="${base_url}/vinyls/${value['id']}">${value['title']}</a></th>`;
             div_html += '<th scope="row">' + value['price'] +'</th>';
             div_html += '<th scope="row">' + value['inventory'] +'</th>';
