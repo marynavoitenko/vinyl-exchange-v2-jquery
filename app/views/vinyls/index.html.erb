@@ -6,12 +6,10 @@ $(function() {
         type: 'GET',
         url: '/vinyls.json'
     }).done(function(data) {
-        console.log(data);
         let div_html = '';
         $.each(data, function( index, value ) {
             let newVinyl = new Vinyl(value);
             div_html += newVinyl.formatIndex();
-            console.log(div_html);
         });
     
         $('#vinyls_table').html(div_html);
