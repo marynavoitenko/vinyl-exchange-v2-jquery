@@ -1,7 +1,3 @@
-<% content_for :table_content do %>
-    <%= render :partial => "vinyl", :collection => @vinyls %>
-<% end %>
-
 <%= render 'layouts/table' %>
 
 <script type='text/javascript' charset='utf-8'>
@@ -11,7 +7,14 @@ $(function() {
         url: '/vinyls.json'
     }).done(function(data) {
         console.log(data);
-        
+        div_html = '';
+        $.each(data, function( index, value ) {
+            div_html =  div_html + '<tr><th scope="row">'+ value['title'] +'</th></tr>';
+
+        });
+
+        console.log(div_html);
+        $('#vinyls_table').html(div_html);
     });
 });
 </script>
