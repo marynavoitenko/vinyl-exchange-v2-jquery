@@ -16,4 +16,5 @@ Rails.application.routes.draw do
   resources :line_items, only: [:create, :edit, :update]
   resources :carts, only: [:show, :edit]
 
+  get '/vinyls/:id/next', to: 'vinyls#next'  
 end
