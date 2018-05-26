@@ -15,14 +15,13 @@ $(function() {
         $('#vinyls_table').html(div_html);
 
         $('.delete_vinyl').click(function() {
-            var id = $(this).attr("id");
+            let id = $(this).attr("id");
             if (confirm('Are you sure?')) {
                 $.ajax({
                 type: 'DELETE',
                 url: `/vinyls/${id}`
                 }).done(function(data) {
                     $(`#vinyl_${id}`).delete();
-
                 });
             }
             
