@@ -31,6 +31,10 @@ class Vinyl < ApplicationRecord
     self.inventory > 0
   end
 
+  def next
+    Vinyl.where("id > ?", id).first
+  end
+
   def genres_attributes=(genres_attributes)
     genres_attributes.values.each do |genre_attributes|
       genre = Genre.find_or_create_by(genre_attributes)
