@@ -72,6 +72,12 @@ class VinylsController < ApplicationController
     end
   end
 
+  def next
+    @vinyl = Vinyl.find(params[:id])
+    @next_vinyl = @vinyl.next
+    render json: @next_vinyl
+  end
+
   private
 
   def vinyl_params
