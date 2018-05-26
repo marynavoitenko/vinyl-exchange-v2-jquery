@@ -7,11 +7,12 @@ $(function() {
         url: '/vinyls.json'
     }).done(function(data) {
         console.log(data);
-        div_html = '';
+        let div_html = '';
+        let base_url = 'http://localhost:3000';
         $.each(data, function( index, value ) {
             div_html += '<tr>';
             div_html += '<th scope="row">' + value['artist_id'] +'</th>';
-            div_html += '<th scope="row">'+ value['title'] +'</th>';
+            div_html += `<th scope="row"><a href="${base_url}/vinyls/${value['id']}">${value['title']}</a></th>`;
             div_html += '<th scope="row">' + value['price'] +'</th>';
             div_html += '<th scope="row">' + value['inventory'] +'</th>';
             div_html += '<th scope="row">' + value['for_sale'] +'</th>';
