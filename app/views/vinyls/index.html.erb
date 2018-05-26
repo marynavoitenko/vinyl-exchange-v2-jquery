@@ -3,3 +3,14 @@
 <% end %>
 
 <%= render 'layouts/table' %>
+
+<script type='text/javascript' charset='utf-8'>
+$(function() {
+    $.ajax({
+        type: 'GET',
+        url: '/vinyls.json'
+    }).done(function(data) {
+        console.log(data);
+    });
+});
+</script>
