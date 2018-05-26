@@ -10,6 +10,7 @@ $(function() {
         let div_html = '';
         let base_url = 'http://localhost:3000';
         $.each(data, function( index, value ) {
+            let newVinyl = new Vinyl(value);
             div_html += '<tr>';
             div_html += `<th scope="row"><a href="${base_url}/artists/${value['artist']['id']}">${value['artist']['name']}</a></th>`;
             div_html += `<th scope="row"><a href="${base_url}/vinyls/${value['id']}">${value['title']}</a></th>`;
@@ -21,5 +22,14 @@ $(function() {
     
         $('#vinyls_table').html(div_html);
     });
+
+    function Vinyl(vinyl) {
+        this.id = vinyl.id;
+        this.title = vinyl.title;
+        this.price = vinyl.price;
+        this.inventory = vinyl.inventory;
+        this.for_sale = vinyl.for_sale;
+        console.log(this);
+    }
 });
 </script>
