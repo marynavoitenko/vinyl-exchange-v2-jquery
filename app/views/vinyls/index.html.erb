@@ -4,7 +4,7 @@
 $(function() {
     $.ajax({
         type: 'GET',
-        url: '/vinyls.json'
+        url: '/vinyls/my_vinyls.json'
     }).done(function(data) {
         let div_html = '';
         $.each(data, function( index, value ) {
