@@ -32,11 +32,19 @@ $(function() {
         let vinyl_html = '<tr>';
         vinyl_html += `<th scope="row"><a href="${base_url}/artists/${this.artist_id}">${this['artist_name']}</a></th>`;
         vinyl_html += `<th scope="row"><a href="${base_url}/vinyls/${this['id']}">${this['title']}</a></th>`;
-        vinyl_html += '<th scope="row">' + this['price'] +'</th>';
+        vinyl_html += '<th scope="row">' + this.formatPrice() +'</th>';
         vinyl_html += '<th scope="row">' + this['inventory'] +'</th>';
-        vinyl_html += '<th scope="row">' + this['for_sale'] +'</th>';
+        vinyl_html += '<th scope="row">' + this.formatForSale() +'</th>';
         vinyl_html += '</tr>';
         return vinyl_html;
+    }
+
+    Vinyl.prototype.formatPrice = function() {
+        return `$${this['price']}`;
+    }
+
+    Vinyl.prototype.formatForSale = function() {
+        return (this.for_sale === true) ? "y" : "n";
     }
 });
 </script>
