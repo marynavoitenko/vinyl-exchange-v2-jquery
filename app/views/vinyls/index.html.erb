@@ -13,7 +13,20 @@ $(function() {
         });
     
         $('#vinyls_table').html(div_html);
+
+        $('.delete_vinyl').click(function() {
+            var id = $(this).attr("id");
+            $.ajax({
+                type: 'DELETE',
+                url: `/vinyls/${id}`
+            }).done(function(data) {
+                $(`#vinyl_${id}`).delete();
+
+            });
+        });
     });
+
+    
 
     function Vinyl(vinyl) {
         this.id = vinyl.id;
@@ -27,14 +40,14 @@ $(function() {
 
     Vinyl.prototype.formatIndex = function() {
         let base_url = 'http://localhost:3000';
-        let vinyl_html = '<tr>';
+        let vinyl_html = `<tr id='vinyl_${this.id}'>`;
         vinyl_html += `<th scope="row"><a href="${base_url}/artists/${this.artist_id}">${this['artist_name']}</a></th>`;
         vinyl_html += `<th scope="row"><a href="${base_url}/vinyls/${this['id']}">${this['title']}</a></th>`;
         vinyl_html += '<th scope="row">' + this.formatPrice() +'</th>';
         vinyl_html += '<th scope="row">' + this['inventory'] +'</th>';
         vinyl_html += '<th scope="row">' + this.formatForSale() +'</th>';
         vinyl_html += `<th scope="row"><a href="${base_url}/vinyls/${this.id}/edit">Edit</a></th>`;
-        vinyl_html += `<th scope="row"><a href="${base_url}/vinyls/${this.artist_id}">Delete</a></th>`;
+        vinyl_html += `<th scope="row"><a href="#" id=${this.id} class="delete_vinyl">Delete</a></th>`;
         vinyl_html += '</tr>';
         return vinyl_html;
     }
