@@ -1,10 +1,11 @@
 class VinylsController < ApplicationController
   def index
     if params[:artist_id]
-      @vinyls = Vinyl.all.where("artist_id = ?", params[:artist_id])
+      vinyls = Vinyl.all.where("artist_id = ?", params[:artist_id])
     else
-      @vinyls = Vinyl.all
+      vinyls = Vinyl.all
     end
+    render json: vinyls
   end
 
   def new
@@ -28,7 +29,8 @@ class VinylsController < ApplicationController
   end
 
   def show
-    @vinyl = Vinyl.find(params[:id])
+    vinyl = Vinyl.find(params[:id])
+    render json: vinyl
   end
 
   def edit
