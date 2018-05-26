@@ -8,7 +8,7 @@ end
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'dotenv-rails'
-
+gem 'active_model_serializers'
 gem 'bootstrap-sass'
 gem 'thin'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
