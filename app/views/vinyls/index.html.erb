@@ -16,13 +16,16 @@ $(function() {
 
         $('.delete_vinyl').click(function() {
             var id = $(this).attr("id");
-            $.ajax({
+            if (confirm('Are you sure?')) {
+                $.ajax({
                 type: 'DELETE',
                 url: `/vinyls/${id}`
-            }).done(function(data) {
-                $(`#vinyl_${id}`).delete();
+                }).done(function(data) {
+                    $(`#vinyl_${id}`).delete();
 
-            });
+                });
+            }
+            
         });
     });
 
