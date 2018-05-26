@@ -33,8 +33,11 @@ class VinylsController < ApplicationController
   end
 
   def show
-    vinyl = Vinyl.find(params[:id])
-    render json: vinyl
+    @vinyl = Vinyl.find(params[:id])
+    respond_to do |f|
+      f.html { render :show }
+      f.json { render json: @vinyl }
+    end
   end
 
   def edit
