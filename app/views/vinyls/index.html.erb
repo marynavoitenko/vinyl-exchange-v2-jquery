@@ -33,6 +33,8 @@ $(function() {
         vinyl_html += '<th scope="row">' + this.formatPrice() +'</th>';
         vinyl_html += '<th scope="row">' + this['inventory'] +'</th>';
         vinyl_html += '<th scope="row">' + this.formatForSale() +'</th>';
+        vinyl_html += `<th scope="row"><a href="${base_url}/vinyls/${this.id}/edit">Edit</a></th>`;
+        vinyl_html += `<th scope="row"><a href="${base_url}/vinyls/${this.artist_id}">Delete</a></th>`;
         vinyl_html += '</tr>';
         return vinyl_html;
     }

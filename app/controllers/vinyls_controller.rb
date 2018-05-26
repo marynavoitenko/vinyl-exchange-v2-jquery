@@ -66,7 +66,10 @@ class VinylsController < ApplicationController
 
   def my_vinyls
     @vinyls = Vinyl.my_vinyls(current_user)
-    render :index
+    respond_to do |f|
+      f.html { render :index }
+      f.json { render json: @vinyls }
+    end
   end
 
   private
