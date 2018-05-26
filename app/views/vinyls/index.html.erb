@@ -8,16 +8,10 @@ $(function() {
     }).done(function(data) {
         console.log(data);
         let div_html = '';
-        let base_url = 'http://localhost:3000';
         $.each(data, function( index, value ) {
             let newVinyl = new Vinyl(value);
-            div_html += '<tr>';
-            div_html += `<th scope="row"><a href="${base_url}/artists/${value['artist']['id']}">${value['artist']['name']}</a></th>`;
-            div_html += `<th scope="row"><a href="${base_url}/vinyls/${value['id']}">${value['title']}</a></th>`;
-            div_html += '<th scope="row">' + value['price'] +'</th>';
-            div_html += '<th scope="row">' + value['inventory'] +'</th>';
-            div_html += '<th scope="row">' + value['for_sale'] +'</th>';
-            div_html += '</tr>'
+            div_html += newVinyl.formatIndex();
+            console.log(div_html);
         });
     
         $('#vinyls_table').html(div_html);
@@ -29,7 +23,20 @@ $(function() {
         this.price = vinyl.price;
         this.inventory = vinyl.inventory;
         this.for_sale = vinyl.for_sale;
-        console.log(this);
+        this.artist_id = vinyl.artist.id;
+        this.artist_name = vinyl.artist.name;
+    }
+
+    Vinyl.prototype.formatIndex = function() {
+        let base_url = 'http://localhost:3000';
+        let vinyl_html = '<tr>';
+        vinyl_html += `<th scope="row"><a href="${base_url}/artists/${this.artist_id}">${this['artist_name']}</a></th>`;
+        vinyl_html += `<th scope="row"><a href="${base_url}/vinyls/${this['id']}">${this['title']}</a></th>`;
+        vinyl_html += '<th scope="row">' + this['price'] +'</th>';
+        vinyl_html += '<th scope="row">' + this['inventory'] +'</th>';
+        vinyl_html += '<th scope="row">' + this['for_sale'] +'</th>';
+        vinyl_html += '</tr>';
+        return vinyl_html;
     }
 });
 </script>
