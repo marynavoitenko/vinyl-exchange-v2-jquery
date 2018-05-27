@@ -74,7 +74,11 @@ class VinylsController < ApplicationController
 
   def next
     @vinyl = Vinyl.find(params[:id])
-    @next_vinyl = @vinyl.next
+    if @vinyl.next
+      @next_vinyl = @vinyl.next
+    else
+      @next_vinyl = Vinyl.first
+    end  
     render json: @next_vinyl
   end
 
