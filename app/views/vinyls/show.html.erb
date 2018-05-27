@@ -2,11 +2,14 @@
 
 <button class='btn btn-primary next'>Next</button>
 
+<div id="current_vinyl_id" style="display:none">0</div>
+
 <script type='text/javascript' charset='utf-8'>
 $(function() {
     let url = window.location.href;
     let id = url.split("/").pop();
-    
+    $("#current_vinyl_id").html(id);
+
     $.ajax({
         type: 'GET',
         url: `/vinyls/${id}.json`
@@ -18,13 +21,15 @@ $(function() {
 
 
     $('.next').click(function() {
+        let curr_id = $("#current_vinyl_id").html();
         $.ajax({
             type: 'GET',
-            url: `/vinyls/${id}/next`
+            url: `/vinyls/${curr_id}/next`
         }).done(function(data) {
             let newVinyl = new Vinyl(data);
             let div_html = newVinyl.formatIndex();
             $('#vinyls_table').html(div_html);
+            $("#current_vinyl_id").html(newVinyl.id);
         });
     });
 
