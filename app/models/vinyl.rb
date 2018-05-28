@@ -32,7 +32,8 @@ class Vinyl < ApplicationRecord
   end
 
   def next
-    Vinyl.where("id > ?", id).first
+    next_vinyls = Vinyl.where("id > ?", id)
+    next_vinyls.empty? ? Vinyl.first : next_vinyls.first
   end
 
   def genres_attributes=(genres_attributes)
