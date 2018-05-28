@@ -1,5 +1,7 @@
 <%= render 'layouts/table' %>
 
+<div class="alert alert-danger" style="display:none"></div>
+
 <form class="new_vinyl" id="new_vinyl" action="/vinyls" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="Fhu0369wSGZiut5R/TcGOZehJNh096b1Khv4B59KpTq7VLwDfBpple9py1qZlVtfK6/zvs1uYdN/Aszc/3SUsA==" />
 
   <div class="form-group">
@@ -56,7 +58,7 @@
 
 <script type='text/javascript' charset='utf-8'>
 $(function() {
-    $(".new_vinyl").hide();
+    $('.new_vinyl').hide();
     $.ajax({
         type: 'GET',
         url: '/vinyls/my_vinyls.json'
@@ -101,7 +103,16 @@ $(function() {
                 let newVinyl = new Vinyl(data);
                 div_html = newVinyl.formatIndex();
                 $('#vinyls_table').append(div_html);
-                $(".new_vinyl").hide();
+                $('.new_vinyl').hide();
+            }).error(function(e) {
+                let err = JSON.parse(e.responseText);
+                console.log(err.errors);
+                $('.alert').show();
+                let error_html = "";
+                $.each(err.errors, function(index, value) {
+                    error_html += value + '<br>';
+                });
+                $('.alert').html(error_html);
             });
         });
         
