@@ -23,15 +23,18 @@ class VinylsController < ApplicationController
   end
 
   def create
-    @vinyl = current_user.vinyls.create(vinyl_params)
+    @vinyl = current_user.vinyls.new(vinyl_params)
 
-    if @vinyl
+    if @vinyl.save
       respond_to do |f|
         f.html { redirect_to vinyl_path(@vinyl) }
         f.json { render json: @vinyl }
       end
     else
-      render :new
+      respond_to do |f|
+        f.html { render :new }
+        f.json { render json: { errors: @vinyl.errors.full_messages }, status: 422 }
+      end
     end
   end
 
