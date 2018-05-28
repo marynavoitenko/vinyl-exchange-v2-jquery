@@ -23,10 +23,10 @@ class VinylsController < ApplicationController
   end
 
   def create
-    @vinyl = current_user.vinyls.new(vinyl_params)
+    @vinyl = current_user.vinyls.create(vinyl_params)
 
-    if @vinyl.save
-      redirect_to vinyl_path(@vinyl)
+    if @vinyl
+      render json: @vinyl
     else
       render :new
     end
