@@ -1,7 +1,62 @@
 <%= render 'layouts/table' %>
 
+<form class="new_vinyl" id="new_vinyl" action="/vinyls" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="Fhu0369wSGZiut5R/TcGOZehJNh096b1Khv4B59KpTq7VLwDfBpple9py1qZlVtfK6/zvs1uYdN/Aszc/3SUsA==" />
+
+  <div class="form-group">
+    <label for="vinyl_title">Title</label>
+    <input type="text" name="vinyl[title]" id="vinyl_title" />
+  </div>
+
+  <div class="form-group">
+    <label for="vinyl_Artist (select existing or create new)">Artist (select existing or create new)</label>
+    <select name="vinyl[artist_id]" id="vinyl_artist_id"><option value=""></option>
+        <option value="1">Surly</option>
+        <option value="2">Miles Davis</option>
+        <option value="3">A Taste Of Honey</option>
+        <option value="4">Marta Acuna</option>
+        <option value="5">Kerri Chandler</option>
+        <option value="6">Toto Chiavetta</option>
+        <option value="7">Eagles &amp; Butterflies</option>
+        <option value="8">Llewellyn</option>
+        <option value="9">Pional</option>
+        <option value="10">Aaliyah</option>
+        <option value="11">Aerosmith</option>
+        <option value="12">Depeche Mode</option>
+    </select><br>
+            
+      <label for="vinyl_artist_attributes_name">New Artist Name</label>
+      <input type="text" name="vinyl[artist_attributes][name]" id="vinyl_artist_attributes_name" />
+  </div>
+
+  <div class="form-group">
+    <label for="vinyl_Genre (select existing or create new)">Genre (select existing or create new)</label>
+    <input type="hidden" name="vinyl[genre_ids][]" value="" /><input type="checkbox" value="1" name="vinyl[genre_ids][]" id="vinyl_genre_ids_1" /><label for="vinyl_genre_ids_1">Jazz</label><input type="checkbox" value="2" name="vinyl[genre_ids][]" id="vinyl_genre_ids_2" /><label for="vinyl_genre_ids_2">Disco</label><input type="checkbox" value="3" name="vinyl[genre_ids][]" id="vinyl_genre_ids_3" /><label for="vinyl_genre_ids_3">House</label><input type="checkbox" value="4" name="vinyl[genre_ids][]" id="vinyl_genre_ids_4" /><label for="vinyl_genre_ids_4">Deep House</label><input type="checkbox" value="5" name="vinyl[genre_ids][]" id="vinyl_genre_ids_5" /><label for="vinyl_genre_ids_5">Tech House</label><input type="checkbox" value="6" name="vinyl[genre_ids][]" id="vinyl_genre_ids_6" /><label for="vinyl_genre_ids_6">R&amp;B</label><input type="checkbox" value="7" name="vinyl[genre_ids][]" id="vinyl_genre_ids_7" /><label for="vinyl_genre_ids_7">Rock</label><input type="checkbox" value="8" name="vinyl[genre_ids][]" id="vinyl_genre_ids_8" /><label for="vinyl_genre_ids_8">Synth</label><input type="checkbox" value="9" name="vinyl[genre_ids][]" id="vinyl_genre_ids_9" /><label for="vinyl_genre_ids_9">Coldwave</label><input type="checkbox" value="10" name="vinyl[genre_ids][]" id="vinyl_genre_ids_10" /><label for="vinyl_genre_ids_10">Hip-Hop</label><br>
+    
+      <label for="vinyl_genres_attributes_0_name">New Genre Name</label>
+      <input type="text" name="vinyl[genres_attributes][0][name]" id="vinyl_genres_attributes_0_name" />
+  </div>
+
+  <div class="form-group">
+    <label for="vinyl_price">Price</label>
+    <input type="text" name="vinyl[price]" id="vinyl_price" />
+  </div>
+
+  <div class="form-group">
+    <label for="vinyl_inventory">Inventory</label>
+    <input type="text" value="1" name="vinyl[inventory]" id="vinyl_inventory" />
+  </div>
+
+  <div class="form-group">
+    <label for="vinyl_for_sale">For Sale</label>
+    <input name="vinyl[for_sale]" type="hidden" value="0" /><input type="checkbox" value="1" name="vinyl[for_sale]" id="vinyl_for_sale" />
+  </div>
+
+  <input type="submit" name="commit" value="Create Vinyl" class="btn btn-primary" data-disable-with="Create Vinyl" />
+</form>
+
 <script type='text/javascript' charset='utf-8'>
 $(function() {
+    $(".new_vinyl").hide();
     $.ajax({
         type: 'GET',
         url: '/vinyls/my_vinyls.json'
