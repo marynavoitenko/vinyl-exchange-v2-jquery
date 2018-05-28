@@ -26,7 +26,10 @@ class VinylsController < ApplicationController
     @vinyl = current_user.vinyls.create(vinyl_params)
 
     if @vinyl
-      render json: @vinyl
+      respond_to do |f|
+        f.html { redirect_to vinyl_path(@vinyl) }
+        f.json { render json: @vinyl }
+      end
     else
       render :new
     end
