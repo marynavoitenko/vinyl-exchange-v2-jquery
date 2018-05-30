@@ -58,4 +58,4 @@ $(function() {
         return (this.for_sale === true) ? "y" : "n";
     }    
 
-}); 
+});
