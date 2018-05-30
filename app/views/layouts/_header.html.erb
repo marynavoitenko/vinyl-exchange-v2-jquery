@@ -7,8 +7,8 @@
           <li><%= link_to "Store Home", store_path %></li>
 
           <% if user_signed_in? %>
-            <li><%= link_to "My Vinyls", my_vinyls_path %></li>
-            <li><%= link_to 'Add New Vinyl', add_new_vinyl, class: "new_vinyl_button" %></li>
+            <li><%= link_to "My Vinyls", my_vinyls_path, class: "my_vinyls" %></li>
+            <li><%= link_to 'Add New Vinyl', add_new_vinyl, class: "add_new_vinyl" %></li>
             <% if current_cart.persisted? %>
               <li><%= link_to "Cart", cart_path(current_cart) %></li>
             <% end %>
