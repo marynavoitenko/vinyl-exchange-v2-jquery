@@ -13,6 +13,7 @@ $(function() {
             $('#vinyls_table').append(div_html);
         };
     });
+ 
 
     function Artist(artist) {
         this.id = artist.id;
@@ -57,4 +58,4 @@ $(function() {
         return (this.for_sale === true) ? "y" : "n";
     }    
 
-});
+}); 

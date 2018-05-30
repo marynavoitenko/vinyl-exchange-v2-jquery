@@ -1,9 +1,9 @@
-<% content_for :table_content do %>
-    <%= render partial: 'vinyl', locals: {vinyl: @vinyl} %>
-<% end %>
-
 <%= render 'layouts/table' %>
 
 <button class='btn btn-primary next'>Next</button>
 
 <div id="current_vinyl_id" style="display:none">0</div>
+
+<button class='btn btn-primary add_new_vinyl'>Add New Vinyl</button>
+
+<%= render partial: 'form', locals: {vinyl: Vinyl.new} %>

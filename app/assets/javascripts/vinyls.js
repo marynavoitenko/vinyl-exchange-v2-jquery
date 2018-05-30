@@ -1,4 +1,5 @@
 $(function() {
+    $(".new_vinyl").hide();
     attachEventListeners();
  });
  
@@ -30,9 +31,8 @@ $(function() {
         
         $('.add_new_vinyl').click(function(e) {
             e.preventDefault();
-            // $(".new_vinyl").show();
+            $(".new_vinyl").show();
             // load form partial without layout
-            <%= render partial: 'form', locals: {vinyl: @vinyl} %>
         });
         
         $('form').submit(function(e) {
@@ -68,10 +68,10 @@ $(function() {
     // VINYL SHOW
 
     $(".vinyl_title").on('click', function() {
-        // let id = $(this).attr('id');
+        let id = $(this).attr('id');
 
-        let url = window.location.href;
-        let id = url.split("/").pop();
+        // let url = window.location.href;
+        // let id = url.split("/").pop();
         $("#current_vinyl_id").html(id);
         $.ajax({
             type: 'GET',
