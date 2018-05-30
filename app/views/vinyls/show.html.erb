@@ -1,70 +1,9 @@
+<% content_for :table_content do %>
+    <%= render partial: 'vinyl', locals: {vinyl: @vinyl} %>
+<% end %>
+
 <%= render 'layouts/table' %>
 
 <button class='btn btn-primary next'>Next</button>
 
 <div id="current_vinyl_id" style="display:none">0</div>
-
-<script type='text/javascript' charset='utf-8'>
-$(function() {
-    let url = window.location.href;
-    let id = url.split("/").pop();
-    $("#current_vinyl_id").html(id);
-
-    $.ajax({
-        type: 'GET',
-        url: `/vinyls/${id}.json`
-    }).done(function(data) {
-        let newVinyl = new Vinyl(data);
-        let div_html = newVinyl.formatIndex();
-        $('#vinyls_table').html(div_html);
-    });
-
-
-    $('.next').click(function() {
-        let curr_id = $("#current_vinyl_id").html();
-        $.ajax({
-            type: 'GET',
-            url: `/vinyls/${curr_id}/next`
-        }).done(function(data) {
-            let newVinyl = new Vinyl(data);
-            let div_html = newVinyl.formatIndex();
-            $('#vinyls_table').html(div_html);
-            $("#current_vinyl_id").html(newVinyl.id);
-        });
-    });
-
-
-    function Vinyl(vinyl) {
-        this.id = vinyl.id;
-        this.title = vinyl.title;
-        this.price = vinyl.price;
-        this.inventory = vinyl.inventory;
-        this.for_sale = vinyl.for_sale;
-        this.artist_id = vinyl.artist.id;
-        this.artist_name = vinyl.artist.name;
-    }
-
-    Vinyl.prototype.formatIndex = function() {
-        let base_url = 'http://localhost:3000';
-        let vinyl_html = `<tr id='vinyl_${this.id}'>`;
-        vinyl_html += `<th scope="row"><a href="${base_url}/artists/${this.artist_id}">${this['artist_name']}</a></th>`;
-        vinyl_html += `<th scope="row"><a href="${base_url}/vinyls/${this['id']}">${this['title']}</a></th>`;
-        vinyl_html += '<th scope="row">' + this.formatPrice() +'</th>';
-        vinyl_html += '<th scope="row">' + this['inventory'] +'</th>';
-        vinyl_html += '<th scope="row">' + this.formatForSale() +'</th>';
-        vinyl_html += `<th scope="row"><a href="${base_url}/vinyls/${this.id}/edit">Edit</a></th>`;
-        vinyl_html += `<th scope="row"><a href="#" id=${this.id} class="delete_vinyl">Delete</a></th>`;
-        vinyl_html += '</tr>';
-        return vinyl_html;
-    }
-
-    Vinyl.prototype.formatPrice = function() {
-        return `$${this['price']}`;
-    }
-
-    Vinyl.prototype.formatForSale = function() {
-        return (this.for_sale === true) ? "y" : "n";
-    }    
-
-});
-</script>
