@@ -1,4 +1,3 @@
-<script type='text/javascript' charset='utf-8'>
 $(function() {
     $('.new_vinyl').hide();
     $.ajax({
@@ -93,12 +92,8 @@ $(function() {
     Vinyl.prototype.formatForSale = function() {
         return (this.for_sale === true) ? "y" : "n";
     }
-});
-</script>
 
-
-<script type='text/javascript' charset='utf-8'>
-$(function() {
+    // VINYL SHOW
     let url = window.location.href;
     let id = url.split("/").pop();
     $("#current_vinyl_id").html(id);
@@ -160,4 +155,3 @@ $(function() {
     }    
 
 });
-</script>
