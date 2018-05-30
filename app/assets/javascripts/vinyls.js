@@ -1,66 +1,68 @@
 $(function() {
+    attachEventListeners();
+ });
+ 
+ function attachEventListeners() {
     $('.my_vinyls').on('click', function() {
-        $('.new_vinyl').hide();
-        $.ajax({
-            type: 'GET',
-            url: '/vinyls/my_vinyls.json'
-        }).done(function(data) {
-            let div_html = '';
-            $.each(data, function( index, value ) {
-                let newVinyl = new Vinyl(value);
-                div_html += newVinyl.formatIndex();
-            });
-        
-            $('#vinyls_table').html(div_html);
+    $.ajax({
+        type: 'GET',
+        url: '/vinyls/my_vinyls.json'
+    }).done(function(data) {
+        let div_html = '';
+        $.each(data, function( index, value ) {
+            let newVinyl = new Vinyl(value);
+            div_html += newVinyl.formatIndex();
+        });
+    
+        $('#vinyls_table').html(div_html);
 
-            $('.delete_vinyl').click(function() {
-                let id = $(this).attr("id");
-                if (confirm('Are you sure?')) {
-                    $.ajax({
-                    type: 'DELETE',
-                    url: `/vinyls/${id}`
-                    }).done(function(data) {
-                        $(`#vinyl_${id}`).delete();
-                    });
-                }
-                
-            });
-            
-            $('.add_new_vinyl').click(function(e) {
-                e.preventDefault();
-                $(".new_vinyl").show();
-            });
-            
-            $('form').submit(function(e) {
-                e.preventDefault();
-                let values = $(this).serialize();
-                console.log(values);
+        $('.delete_vinyl').on('click',  function deleteVinyl() {
+            let id = $(this).attr("id");
+            if (confirm('Are you sure you want to delete it?')) {
                 $.ajax({
-                    type: 'POST',
-                    data: values, 
-                    url: '/vinyls/',
-                    dataType: 'json'
+                type: 'DELETE',
+                url: `/vinyls/${id}`
                 }).done(function(data) {
-                    console.log(data);
-                    let newVinyl = new Vinyl(data);
-                    div_html = newVinyl.formatIndex();
-                    $('#vinyls_table').append(div_html);
-                    $('.new_vinyl').hide();
-                }).error(function(e) {
-                    let err = JSON.parse(e.responseText);
-                    console.log(err.errors);
-                    $('.alert').show();
-                    let error_html = "";
-                    $.each(err.errors, function(index, value) {
-                        error_html += value + '<br>';
-                    });
-                    $('.alert').html(error_html);
+                    $(`#vinyl_${id}`).delete();
                 });
+            }
+         });
+        
+        $('.add_new_vinyl').click(function(e) {
+            e.preventDefault();
+            // $(".new_vinyl").show();
+            // load form partial without layout
+            <%= render partial: 'form', locals: {vinyl: @vinyl} %>
+        });
+        
+        $('form').submit(function(e) {
+            e.preventDefault();
+            let values = $(this).serialize();
+            console.log(values);
+            $.ajax({
+                type: 'POST',
+                data: values, 
+                url: '/vinyls/',
+                dataType: 'json'
+            }).done(function(data) {
+                console.log(data);
+                let newVinyl = new Vinyl(data);
+                div_html = newVinyl.formatIndex();
+                $('#vinyls_table').append(div_html);
+                $('.new_vinyl').hide();
+            }).error(function(e) {
+                let err = JSON.parse(e.responseText);
+                console.log(err.errors);
+                $('.alert').show();
+                let error_html = "";
+                $.each(err.errors, function(index, value) {
+                    error_html += value + '<br>';
+                });
+                $('.alert').html(error_html);
             });
         });
     });
-    
-
+ });   
     
 
     // VINYL SHOW
@@ -102,7 +104,7 @@ $(function() {
         });
     });
 
-    
+ };   
 
 
     function Vinyl(vinyl) {
@@ -136,5 +138,4 @@ $(function() {
     Vinyl.prototype.formatForSale = function() {
         return (this.for_sale === true) ? "y" : "n";
     }    
-
-});
+    
