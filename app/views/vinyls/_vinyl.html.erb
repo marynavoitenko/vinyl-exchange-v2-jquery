@@ -1,6 +1,6 @@
 <tr>
   <th scope="row"><%=  link_to vinyl.artist.name, artist_path(vinyl.artist)  %></th>
-  <th scope="row"><%=  link_to vinyl.title, vinyl_path(vinyl)  %></th>
+  <th scope="row" class="vinyl_title" id="<%= vinyl.id %>"><%=  link_to vinyl.title, vinyl_path(vinyl)  %></th>
   <th scope="row">$<%= vinyl.price %></th>
   <th scope="row"><%= vinyl.inventory %></th>
   <th scope="row"><%= vinyl.for_sale_display %></th>
