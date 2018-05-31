@@ -3,15 +3,13 @@ $( document ).on('turbolinks:load', function() {
     attachEventListeners();
 });
 
-// function attachEventListeners() {
-//     $('.my_vinyls').on('click', getMyVinylsIndex);
-// }
-
-// function getMyVinylsIndex() {
-    
-// }
 function attachEventListeners() {
-    $('.vinyls_index').on('click', getVinylsIndex); 
+    // GET vinyls index via ajax and display
+    $('.vinyls_index').on('click', getVinylsIndex);
+    // GET single vinyl and display
+    $(getVinyl);
+    // GET next vinyl and display without page refresh
+    $('.next').click( loadNextVinyl );
     
     function getVinylsIndex() {
         $.ajax({
@@ -30,7 +28,7 @@ function attachEventListeners() {
             $('.delete_vinyl').click( deleteVinyl ); 
         });
     };
-
+    
     function deleteVinyl() {
         let id = $(this).attr("id");
         if (confirm('Are you sure you want to delete this vinyl?')) {
@@ -43,6 +41,35 @@ function attachEventListeners() {
         }
         return false;
     };
+
+    function getVinyl() {
+        let url = window.location.href;
+        let id = url.split("/").pop();
+        $("#current_vinyl_id").html(id);
+    
+        $.ajax({
+            type: 'GET',
+            url: `/vinyls/${id}.json`
+        }).done(function(data) {
+            let newVinyl = new Vinyl(data);
+            let div_html = newVinyl.formatIndex();
+            $('#vinyls_table').html(div_html);
+        }); 
+    };
+    
+    function loadNextVinyl() {
+        let curr_id = $("#current_vinyl_id").html();
+        $.ajax({
+            type: 'GET',
+            url: `/vinyls/${curr_id}/next`
+        }).done(function(data) {
+            let newVinyl = new Vinyl(data);
+            let div_html = newVinyl.formatIndex();
+            $('#vinyls_table').html(div_html);
+            $("#current_vinyl_id").html(newVinyl.id);
+        });
+    };    
+
 
 // $(function() {
 //     $('.new_vinyl').hide();
@@ -138,37 +165,5 @@ function attachEventListeners() {
     Vinyl.prototype.formatForSale = function() {
         return (this.for_sale === true) ? "y" : "n";
     }
-
-
-
-
-// $(function() {
-//     let url = window.location.href;
-//     let id = url.split("/").pop();
-//     $("#current_vinyl_id").html(id);
-
-//     $.ajax({
-//         type: 'GET',
-//         url: `/vinyls/${id}.json`
-//     }).done(function(data) {
-//         let newVinyl = new Vinyl(data);
-//         let div_html = newVinyl.formatIndex();
-//         $('#vinyls_table').html(div_html);
-//     });
-
-
-//     $('.next').click(function() {
-//         let curr_id = $("#current_vinyl_id").html();
-//         $.ajax({
-//             type: 'GET',
-//             url: `/vinyls/${curr_id}/next`
-//         }).done(function(data) {
-//             let newVinyl = new Vinyl(data);
-//             let div_html = newVinyl.formatIndex();
-//             $('#vinyls_table').html(div_html);
-//             $("#current_vinyl_id").html(newVinyl.id);
-//         });
-//     });
-// });
 
 }
