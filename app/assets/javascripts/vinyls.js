@@ -11,7 +11,9 @@ $( document ).on('turbolinks:load', function() {
     
 // }
 function attachEventListeners() {
-    $('.vinyls_index').on('click', function (e) {
+    $('.vinyls_index').on('click', getVinylIndex); 
+    
+    function getVinylIndex() {
         $.ajax({
             type: 'GET',
             url: '/vinyls/my_vinyls.json'
@@ -40,7 +42,7 @@ function attachEventListeners() {
                 return false;
             };
         });
-    });
+    };
 
 
 
