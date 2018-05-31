@@ -1,63 +1,107 @@
-$(function() {
-    $('.new_vinyl').hide();
-    $.ajax({
-        type: 'GET',
-        url: '/vinyls/my_vinyls.json'
-    }).done(function(data) {
-        let div_html = '';
-        $.each(data, function( index, value ) {
-            let newVinyl = new Vinyl(value);
-            div_html += newVinyl.formatIndex();
-        });
-    
-        $('#vinyls_table').html(div_html);
+$( document ).on('turbolinks:load', function() {
+    console.log('It works on each visit!');
+    attachEventListeners();
+});
 
-        $('.delete_vinyl').click(function() {
-            let id = $(this).attr("id");
-            if (confirm('Are you sure you want to delete this vinyl?')) {
-                $.ajax({
-                type: 'DELETE',
-                url: `/vinyls/${id}`
-                }).done(function(data) {
-                    $(`#vinyl_${id}`).delete();
-                });
-            }
-            
-        });
+// function attachEventListeners() {
+//     $('.my_vinyls').on('click', getMyVinylsIndex);
+// }
+
+// function getMyVinylsIndex() {
+    
+// }
+function attachEventListeners() {
+    $('.vinyls_index').on('click', function (e) {
+        $.ajax({
+            type: 'GET',
+            url: '/vinyls/my_vinyls.json'
+        }).done(function(data) {
+            $('.vinyls_index').hide();
+            let div_html = '';
+            $.each(data, function( index, value ) {
+                let newVinyl = new Vinyl(value);
+                div_html += newVinyl.formatIndex();
+            });
         
-        $('.new_vinyl_button').click(function(e) {
-            e.preventDefault();
-            $(".new_vinyl").show();
-        });
-        
-        $('form').submit(function(e) {
-            e.preventDefault();
-            let values = $(this).serialize();
-            console.log(values);
-            $.ajax({
-                type: 'POST',
-                data: values, 
-                url: '/vinyls/',
-                dataType: 'json'
-            }).done(function(data) {
-                console.log(data);
-                let newVinyl = new Vinyl(data);
-                div_html = newVinyl.formatIndex();
-                $('#vinyls_table').append(div_html);
-                $('.new_vinyl').hide();
-            }).error(function(e) {
-                let err = JSON.parse(e.responseText);
-                console.log(err.errors);
-                $('.alert').show();
-                let error_html = "";
-                $.each(err.errors, function(index, value) {
-                    error_html += value + '<br>';
-                });
-                $('.alert').html(error_html);
+            $('#vinyls_table').html(div_html);
+    
+            $('.delete_vinyl').click(function(e) {
+                let id = $(this).attr("id");
+                if (confirm('Are you sure you want to delete this vinyl?')) {
+                    $.ajax({
+                    type: 'DELETE',
+                    url: `/vinyls/${id}`
+                    }).done(function(data) {
+                        $(`#vinyl_${id}`).delete();
+                    });
+                }
+                return false;
             });
         });
-        
     });
+
+
+
+// $(function() {
+//     $('.new_vinyl').hide();
+//     $.ajax({
+//         type: 'GET',
+//         url: '/vinyls/my_vinyls.json'
+//     }).done(function(data) {
+//         let div_html = '';
+//         $.each(data, function( index, value ) {
+//             let newVinyl = new Vinyl(value);
+//             div_html += newVinyl.formatIndex();
+//         });
+    
+//         $('#vinyls_table').html(div_html);
+
+//         $('.delete_vinyl').click(function() {
+//             let id = $(this).attr("id");
+//             if (confirm('Are you sure you want to delete this vinyl?')) {
+//                 $.ajax({
+//                 type: 'DELETE',
+//                 url: `/vinyls/${id}`
+//                 }).done(function(data) {
+//                     $(`#vinyl_${id}`).delete();
+//                 });
+//             }
+            
+//         });
+        
+//         $('.new_vinyl_button').click(function(e) {
+//             e.preventDefault();
+//             $(".new_vinyl").show();
+//         });
+        
+//         $('form').submit(function(e) {
+//             e.preventDefault();
+//             let values = $(this).serialize();
+//             console.log(values);
+//             $.ajax({
+//                 type: 'POST',
+//                 data: values, 
+//                 url: '/vinyls/',
+//                 dataType: 'json'
+//             }).done(function(data) {
+//                 console.log(data);
+//                 let newVinyl = new Vinyl(data);
+//                 div_html = newVinyl.formatIndex();
+//                 $('#vinyls_table').append(div_html);
+//                 $('.new_vinyl').hide();
+//             }).error(function(e) {
+//                 let err = JSON.parse(e.responseText);
+//                 console.log(err.errors);
+//                 $('.alert').show();
+//                 let error_html = "";
+//                 $.each(err.errors, function(index, value) {
+//                     error_html += value + '<br>';
+//                 });
+//                 $('.alert').html(error_html);
+//             });
+//         });
+        
+//     });
 
     
 
@@ -92,4 +136,37 @@ $(function() {
     Vinyl.prototype.formatForSale = function() {
         return (this.for_sale === true) ? "y" : "n";
     }
-});
+
+
+
+
+// $(function() {
+//     let url = window.location.href;
+//     let id = url.split("/").pop();
+//     $("#current_vinyl_id").html(id);
+
+//     $.ajax({
+//         type: 'GET',
+//         url: `/vinyls/${id}.json`
+//     }).done(function(data) {
+//         let newVinyl = new Vinyl(data);
+//         let div_html = newVinyl.formatIndex();
+//         $('#vinyls_table').html(div_html);
+//     });
+
+
+//     $('.next').click(function() {
+//         let curr_id = $("#current_vinyl_id").html();
+//         $.ajax({
+//             type: 'GET',
+//             url: `/vinyls/${curr_id}/next`
+//         }).done(function(data) {
+//             let newVinyl = new Vinyl(data);
+//             let div_html = newVinyl.formatIndex();
+//             $('#vinyls_table').html(div_html);
+//             $("#current_vinyl_id").html(newVinyl.id);
+//         });
+//     });
+// });
+
+}
