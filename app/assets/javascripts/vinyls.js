@@ -25,7 +25,9 @@ function attachEventListeners() {
         
             $('#vinyls_table').html(div_html);
     
-            $('.delete_vinyl').click(function(e) {
+            $('.delete_vinyl').click( deleteVinyl );
+            
+            function deleteVinyl() {
                 let id = $(this).attr("id");
                 if (confirm('Are you sure you want to delete this vinyl?')) {
                     $.ajax({
@@ -36,7 +38,7 @@ function attachEventListeners() {
                     });
                 }
                 return false;
-            });
+            };
         });
     });
 
