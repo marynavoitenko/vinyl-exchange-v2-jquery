@@ -98,30 +98,7 @@ function attachEventListeners() {
 
 // $(function() {
 //     $('.new_vinyl').hide();
-//     $.ajax({
-//         type: 'GET',
-//         url: '/vinyls/my_vinyls.json'
-//     }).done(function(data) {
-//         let div_html = '';
-//         $.each(data, function( index, value ) {
-//             let newVinyl = new Vinyl(value);
-//             div_html += newVinyl.formatIndex();
-//         });
-    
-//         $('#vinyls_table').html(div_html);
-
-//         $('.delete_vinyl').click(function() {
-//             let id = $(this).attr("id");
-//             if (confirm('Are you sure you want to delete this vinyl?')) {
-//                 $.ajax({
-//                 type: 'DELETE',
-//                 url: `/vinyls/${id}`
-//                 }).done(function(data) {
-//                     $(`#vinyl_${id}`).delete();
-//                 });
-//             }
-            
-//         });
+//     
         
 //         $('.new_vinyl_button').click(function(e) {
 //             e.preventDefault();

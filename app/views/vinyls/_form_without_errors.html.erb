@@ -1,0 +1,43 @@
+<div class="container">
+  <%= form_for vinyl do |f| %>
+    
+  <div class="form-group">
+    <%= f.label :title, "Title" %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label "Artist (select existing or create new)" %>
+    <%= f.collection_select :artist_id, Artist.all, :id, :name, {include_blank: true}  %><br>
+    <%= f.fields_for :artist, vinyl.build_artist do |artist_fields| %>
+      <%= artist_fields.label :name, "New Artist Name" %>
+      <%= artist_fields.text_field :name %>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label "Genre (select existing or create new)" %>
+    <%= f.collection_check_boxes :genre_ids, Genre.all, :id, :name %><br>
+    <%= f.fields_for :genres, vinyl.genres.build do |genres_fields| %>
+      <%= genres_fields.label :name, "New Genre Name" %>
+      <%= genres_fields.text_field :name %>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :price, "Price" %>
+    <%= f.text_field :price %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :inventory, "Inventory" %>
+    <%= f.text_field :inventory %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :for_sale, "For Sale" %>
+    <%= f.check_box :for_sale %>
+  </div>
+
+  <%= f.submit class: 'btn btn-primary create_vinyl' %>
+<% end %>
