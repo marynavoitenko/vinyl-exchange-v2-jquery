@@ -46,16 +46,18 @@ function attachEventListeners() {
     function getVinyl() {
         let url = window.location.href;
         let id = url.split("/").pop();
-        $("#current_vinyl_id").html(id);
-    
-        $.ajax({
-            type: 'GET',
-            url: `/vinyls/${id}.json`
-        }).done(function(data) {
-            let newVinyl = new Vinyl(data);
-            let div_html = newVinyl.formatIndex();
-            $('#vinyls_table').html(div_html);
-        }); 
+        if (Number(id)) {
+            $("#current_vinyl_id").html(id);
+        
+            $.ajax({
+                type: 'GET',
+                url: `/vinyls/${id}.json`
+            }).done(function(data) {
+                let newVinyl = new Vinyl(data);
+                let div_html = newVinyl.formatIndex();
+                $('#vinyls_table').html(div_html);
+            });
+        }
     };
     
     function loadNextVinyl() {
