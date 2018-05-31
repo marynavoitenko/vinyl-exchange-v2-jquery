@@ -122,53 +122,56 @@ function attachEventListeners() {
     });
 
 
-    function Vinyl(vinyl) {
-        this.id = vinyl.id;
-        this.title = vinyl.title;
-        this.price = vinyl.price;
-        this.inventory = vinyl.inventory;
-        this.for_sale = vinyl.for_sale;
-        this.artist_id = vinyl.artist.id;
-        this.artist_name = vinyl.artist.name;
-        this.genres = [];
-        let genres = this.genres;
-        vinyl.genres.forEach(function(genre) {
-            let newGenre = new Genre(genre);
-            genres.push(newGenre);
-        });
-        this.genres = genres;
-    }
+    class Vinyl {
+        constructor(vinyl) {
+            this.id = vinyl.id;
+            this.title = vinyl.title;
+            this.price = vinyl.price;
+            this.inventory = vinyl.inventory;
+            this.for_sale = vinyl.for_sale;
+            this.artist_id = vinyl.artist.id;
+            this.artist_name = vinyl.artist.name;
+            this.genres = [];
+            let genres = this.genres;
+            vinyl.genres.forEach(function(genre) {
+                let newGenre = new Genre(genre);
+                genres.push(newGenre);
+            });
+            this.genres = genres;
+        }
+        
+        formatIndex() {
+            let base_url = 'http://localhost:3000';
+            let vinyl_html = `<tr id='vinyl_${this.id}'>`;
+            vinyl_html += `<th scope="row"><a href="${base_url}/artists/${this.artist_id}">${this['artist_name']}</a></th>`;
+            vinyl_html += `<th scope="row"><a href="${base_url}/vinyls/${this['id']}">${this['title']}</a></th>`;
+            vinyl_html += '<th scope="row">' + this.formatPrice() +'</th>';
+            vinyl_html += '<th scope="row">' + this['inventory'] +'</th>';
+            vinyl_html += '<th scope="row">' + this.formatForSale() +'</th>';
+            vinyl_html += `<th scope="row"><a href="${base_url}/vinyls/${this.id}/edit">Edit</a></th>`;
+            vinyl_html += `<th scope="row"><a href="#" id=${this.id} class="delete_vinyl">Delete</a></th>`;
+            vinyl_html += '</tr>';
+            return vinyl_html;
+        }
+    
+        formatPrice() {
+            return `$${this['price']}`;
+        }
+    
+        formatForSale() {
+            return (this.for_sale === true) ? "y" : "n";
+        }
+    };
 
-    function Genre(genre) {
-        this.id = genre.id;
-        this.name = genre.name;
-    }
-
-    Vinyl.prototype.formatIndex = function() {
-        let base_url = 'http://localhost:3000';
-        let vinyl_html = `<tr id='vinyl_${this.id}'>`;
-        vinyl_html += `<th scope="row"><a href="${base_url}/artists/${this.artist_id}">${this['artist_name']}</a></th>`;
-        vinyl_html += `<th scope="row"><a href="${base_url}/vinyls/${this['id']}">${this['title']}</a></th>`;
-        vinyl_html += '<th scope="row">' + this.formatPrice() +'</th>';
-        vinyl_html += '<th scope="row">' + this['inventory'] +'</th>';
-        vinyl_html += '<th scope="row">' + this.formatForSale() +'</th>';
-        vinyl_html += `<th scope="row"><a href="${base_url}/vinyls/${this.id}/edit">Edit</a></th>`;
-        vinyl_html += `<th scope="row"><a href="#" id=${this.id} class="delete_vinyl">Delete</a></th>`;
-        vinyl_html += '</tr>';
-        return vinyl_html;
-    }
-
-    Vinyl.prototype.formatPrice = function() {
-        return `$${this['price']}`;
-    }
-
-    Vinyl.prototype.formatForSale = function() {
-        return (this.for_sale === true) ? "y" : "n";
-    }
-
-    Genre.prototype.formatItem = function() {
-        let genre_html = `<li class="list-group-item">${this.name}</li>`
-        return genre_html;
-    }
+    class Genre {
+        constructor(genre) {
+            this.id = genre.id;
+            this.name = genre.name;
+        }
+        formatItem() {
+            let genre_html = `<li class="list-group-item">${this.name}</li>`
+            return genre_html;
+        }
+    };
 
 }
