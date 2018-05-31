@@ -1,5 +1,5 @@
 <div class="container">
-  <%= form_for vinyl do |f| %>
+  <%= form_for vinyl, :html => {:class => 'js-new-vinyl-form'} do |f| %>
     
   <div class="form-group">
     <%= f.label :title, "Title" %>
@@ -39,5 +39,5 @@
     <%= f.check_box :for_sale %>
   </div>
 
-  <%= f.submit class: 'btn btn-primary create_vinyl' %>
+  <%= f.submit class: 'btn btn-primary' %>
 <% end %>

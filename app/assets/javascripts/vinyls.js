@@ -97,7 +97,7 @@ function attachEventListeners() {
         });
     }
 
-    $('form').submit(function(e) {
+    $('.js-new-vinyl-form').submit(function(e) {
         e.preventDefault();
         let values = $(this).serialize();
         $('.alert').hide();
