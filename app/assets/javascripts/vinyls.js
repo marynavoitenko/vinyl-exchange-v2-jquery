@@ -73,7 +73,19 @@ function attachEventListeners() {
     };    
 
     function loadGenres() {
-        debugger
+        let vinyl_id = $("#current_vinyl_id").html();
+        $.ajax({
+            type: 'GET',
+            url: `/vinyls/${vinyl_id}.json`
+        }).done(function(data) {
+            console.log(data);
+            let newVinyl = new Vinyl(data);
+            $('#vinyls_table').html("");
+            for (let i = 0; i < newArtist.vinyls.length; i++) {
+                let div_html = newArtist.vinyls[i].formatIndex(newArtist.id, newArtist.name);
+                $('#vinyls_table').append(div_html);
+            };
+        });
     }
 
 // $(function() {
