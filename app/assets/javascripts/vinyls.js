@@ -61,6 +61,7 @@ function attachEventListeners() {
     
     function loadNextVinyl() {
         let curr_id = $("#current_vinyl_id").html();
+        $('#genres').hide();
         $.ajax({
             type: 'GET',
             url: `/vinyls/${curr_id}/next`
@@ -73,18 +74,25 @@ function attachEventListeners() {
     };    
 
     function loadGenres() {
+        $('#genres').show();
         let vinyl_id = $("#current_vinyl_id").html();
         $.ajax({
             type: 'GET',
             url: `/vinyls/${vinyl_id}.json`
         }).done(function(data) {
-            console.log(data);
             let newVinyl = new Vinyl(data);
-            $('#vinyls_table').html("");
-            for (let i = 0; i < newArtist.vinyls.length; i++) {
-                let div_html = newArtist.vinyls[i].formatIndex(newArtist.id, newArtist.name);
-                $('#vinyls_table').append(div_html);
-            };
+            $('#genres').html("");
+            if (newVinyl.genres.length > 0) {
+                let genre_html = '<ul class="list-group">';
+                for (let i = 0; i < newVinyl.genres.length; i++) {
+                    let genre_html = newVinyl.genres[i].formatItem();
+                    $('#genres').append(genre_html);
+                };
+                genre_html += '</ul>';
+            } else {
+                $('#genres').html('Vinyl has no genres.');
+            }
+            
         });
     }
 
@@ -159,6 +167,18 @@ function attachEventListeners() {
         this.for_sale = vinyl.for_sale;
         this.artist_id = vinyl.artist.id;
         this.artist_name = vinyl.artist.name;
+        this.genres = [];
+        let genres = this.genres;
+        vinyl.genres.forEach(function(genre) {
+            let newGenre = new Genre(genre);
+            genres.push(newGenre);
+        });
+        this.genres = genres;
+    }
+
+    function Genre(genre) {
+        this.id = genre.id;
+        this.name = genre.name;
     }
 
     Vinyl.prototype.formatIndex = function() {
@@ -181,6 +201,11 @@ function attachEventListeners() {
 
     Vinyl.prototype.formatForSale = function() {
         return (this.for_sale === true) ? "y" : "n";
+    }
+
+    Genre.prototype.formatItem = function() {
+        let genre_html = `<li class="list-group-item">${this.name}</li>`
+        return genre_html;
     }
 
 }
