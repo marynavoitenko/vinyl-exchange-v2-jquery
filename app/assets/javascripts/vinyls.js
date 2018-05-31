@@ -11,6 +11,8 @@ function attachEventListeners() {
     // GET next vinyl and display without page refresh
     $('.next').click( loadNextVinyl );
     
+    $('.load_genres').click( loadGenres );
+
     function getVinylsIndex() {
         $.ajax({
             type: 'GET',
@@ -70,6 +72,9 @@ function attachEventListeners() {
         });
     };    
 
+    function loadGenres() {
+        debugger
+    }
 
 // $(function() {
 //     $('.new_vinyl').hide();
