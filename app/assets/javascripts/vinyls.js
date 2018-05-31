@@ -11,9 +11,9 @@ $( document ).on('turbolinks:load', function() {
     
 // }
 function attachEventListeners() {
-    $('.vinyls_index').on('click', getVinylIndex); 
+    $('.vinyls_index').on('click', getVinylsIndex); 
     
-    function getVinylIndex() {
+    function getVinylsIndex() {
         $.ajax({
             type: 'GET',
             url: '/vinyls/my_vinyls.json'
@@ -27,24 +27,22 @@ function attachEventListeners() {
         
             $('#vinyls_table').html(div_html);
     
-            $('.delete_vinyl').click( deleteVinyl );
-            
-            function deleteVinyl() {
-                let id = $(this).attr("id");
-                if (confirm('Are you sure you want to delete this vinyl?')) {
-                    $.ajax({
-                    type: 'DELETE',
-                    url: `/vinyls/${id}`
-                    }).done(function(data) {
-                        $(`#vinyl_${id}`).delete();
-                    });
-                }
-                return false;
-            };
+            $('.delete_vinyl').click( deleteVinyl ); 
         });
     };
 
-
+    function deleteVinyl() {
+        let id = $(this).attr("id");
+        if (confirm('Are you sure you want to delete this vinyl?')) {
+            $.ajax({
+            type: 'DELETE',
+            url: `/vinyls/${id}`
+            }).done(function(data) {
+                $(`#vinyl_${id}`).delete();
+            });
+        }
+        return false;
+    };
 
 // $(function() {
 //     $('.new_vinyl').hide();
