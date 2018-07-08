@@ -7,7 +7,7 @@ function attachEventListeners() {
     $('.vinyls_index').on('click', getVinylsIndex);
     // GET next vinyl and display without page refresh
     $('.next').click( loadNextVinyl );
-
+    // GET genres and display on vinyl show
     $('.load_genres').click( loadGenres );
 
     function getVinylsIndex() {
@@ -41,22 +41,6 @@ function attachEventListeners() {
         return false;
     };
 
-    function getVinyl() {
-        let url = window.location.href;
-        let id = url.split("/").pop();
-        if (Number(id)) {
-            $("#current_vinyl_id").html(id);
-        
-            $.ajax({
-                type: 'GET',
-                url: `/vinyls/${id}.json`
-            }).done(function(data) {
-                let newVinyl = new Vinyl(data);
-                let div_html = newVinyl.formatIndex();
-                $('#vinyls_table').html(div_html);
-            });
-        }
-    };
     
     function loadNextVinyl() {
         // if first item, get id from url and store in hidden div
@@ -67,8 +51,7 @@ function attachEventListeners() {
             $("#current_vinyl_id").html(id);
             curr_id = $("#current_vinyl_id").html();
         }
-        console.log(curr_id);
-         
+
         $('#genres').hide();
         $.ajax({
             type: 'GET',
