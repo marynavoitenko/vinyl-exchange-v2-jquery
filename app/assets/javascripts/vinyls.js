@@ -35,7 +35,7 @@ function attachEventListeners() {
             type: 'DELETE',
             url: `/vinyls/${id}`
             }).done(function(data) {
-                $(`#vinyl_${id}`).delete();
+                $(`#vinyl_${id}`).remove();
             });
         }
         return false;
