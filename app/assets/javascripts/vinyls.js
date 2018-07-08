@@ -9,7 +9,7 @@ function attachEventListeners() {
     $(getVinyl);
     // GET next vinyl and display without page refresh
     $('.next').click( loadNextVinyl );
-    
+
     $('.load_genres').click( loadGenres );
 
     function getVinylsIndex() {
@@ -131,8 +131,7 @@ function attachEventListeners() {
             this.for_sale = vinyl.for_sale;
             this.artist_id = vinyl.artist.id;
             this.artist_name = vinyl.artist.name;
-            this.genres = [];
-            let genres = this.genres;
+            let genres = [];
             vinyl.genres.forEach(function(genre) {
                 let newGenre = new Genre(genre);
                 genres.push(newGenre);
