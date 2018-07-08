@@ -5,8 +5,6 @@ $( document ).on('turbolinks:load', function() {
 function attachEventListeners() {
     // GET vinyls index via ajax and display
     $('.vinyls_index').on('click', getVinylsIndex);
-    // GET single vinyl and display
-    $(getVinyl);
     // GET next vinyl and display without page refresh
     $('.next').click( loadNextVinyl );
 
@@ -61,7 +59,16 @@ function attachEventListeners() {
     };
     
     function loadNextVinyl() {
+        // if first item, get id from url and store in hidden div
         let curr_id = $("#current_vinyl_id").html();
+        if (curr_id == 0) {
+            let url = window.location.href;
+            let id = url.split("/").pop();
+            $("#current_vinyl_id").html(id);
+            curr_id = $("#current_vinyl_id").html();
+        }
+        console.log(curr_id);
+         
         $('#genres').hide();
         $.ajax({
             type: 'GET',

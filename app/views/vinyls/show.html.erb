@@ -1,3 +1,7 @@
+<% content_for :table_content do %>
+    <%= render partial: 'vinyl', locals: {vinyl: @vinyl} %>
+<% end %>
+
 <%= render 'layouts/table' %>
 
 <button class='btn btn-primary load_genres'>Show Genres</button>
