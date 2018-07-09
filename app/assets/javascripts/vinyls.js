@@ -17,7 +17,9 @@ function attachEventListeners() {
         }).done(function(data) {
             $('.vinyls_index').hide();
             let div_html = '';
+            data.sort((a,b) => b.inventory - a.inventory );
             $.each(data, function( index, value ) {
+                
                 let newVinyl = new Vinyl(value);
                 div_html += newVinyl.formatIndex();
             });
@@ -98,7 +100,7 @@ function attachEventListeners() {
             dataType: 'json'
         }).done(function(data) {
             let newVinyl = new Vinyl(data);
-            div_html = newVinyl.formatIndex();
+            let div_html = newVinyl.formatIndex();
             $('#vinyls_table').append(div_html);
         }).error(function(e) {
             let err = JSON.parse(e.responseText);
