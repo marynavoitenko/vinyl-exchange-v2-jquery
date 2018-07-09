@@ -1,7 +1,7 @@
 # VINYL EXCHANGE
 
 ## About
-This app is a vinyl exchange platform. Add your vinyls for sale and every other user will be able to buy them. Or buy the vinyls that someone else has posted.
+A marketplace for vinyl enthusiasts to buy and sell records. Add your vinyls for sale and every other user will be able to buy them. Or buy the vinyls that someone else has posted.
 
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
@@ -27,7 +27,7 @@ A step by step guide how to get a development env running
 Clone this repo
 
 ```
-git clone https://github.com/marynavoitenko/vinyl-exchange.git
+git clone git@github.com:marynavoitenko/vinyl-exchange-v2-jquery.git
 ```
 
 Install all dependencies
