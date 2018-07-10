@@ -16,22 +16,22 @@ function attachEventListeners() {
             url: '/vinyls/my_vinyls.json'
         }).done(function(data) {
             $('.vinyls_index').hide();
-            let div_html = '';
+            let divHtml = '';
             data.sort((a,b) => b.inventory - a.inventory );
             $.each(data, function( index, value ) {
                 
-                let newVinyl = new Vinyl(value);
-                div_html += newVinyl.formatIndex();
+                const newVinyl = new Vinyl(value);
+                divHtml += newVinyl.formatIndex();
             });
         
-            $('#vinyls_table').html(div_html);
+            $('#vinyls_table').html(divHtml);
     
             $('.delete_vinyl').click( deleteVinyl ); 
         });
     };
     
     function deleteVinyl() {
-        let id = $(this).attr("id");
+        const id = $(this).attr("id");
         if (confirm('Are you sure you want to delete this vinyl?')) {
             $.ajax({
             type: 'DELETE',
@@ -46,42 +46,42 @@ function attachEventListeners() {
     
     function loadNextVinyl() {
         // if first item, get id from url and store in hidden div
-        let curr_id = $("#current_vinyl_id").html();
-        if (curr_id == 0) {
-            let url = window.location.href;
-            let id = url.split("/").pop();
+        let currentId = $("#current_vinyl_id").html();
+        if (currentId == 0) {
+            const url = window.location.href;
+            const id = url.split("/").pop();
             $("#current_vinyl_id").html(id);
-            curr_id = $("#current_vinyl_id").html();
+            currentId = $("#current_vinyl_id").html();
         }
 
         $('#genres').hide();
         $.ajax({
             type: 'GET',
-            url: `/vinyls/${curr_id}/next`
+            url: `/vinyls/${currentId}/next`
         }).done(function(data) {
-            let newVinyl = new Vinyl(data);
-            let div_html = newVinyl.formatIndex();
-            $('#vinyls_table').html(div_html);
+            const newVinyl = new Vinyl(data);
+            const divHtml = newVinyl.formatIndex();
+            $('#vinyls_table').html(divHtml);
             $("#current_vinyl_id").html(newVinyl.id);
         });
     };    
 
     function loadGenres() {
         $('#genres').show();
-        let vinyl_id = $("#current_vinyl_id").html();
+        const vinylId = $("#current_vinyl_id").html();
         $.ajax({
             type: 'GET',
-            url: `/vinyls/${vinyl_id}.json`
+            url: `/vinyls/${vinylId}.json`
         }).done(function(data) {
-            let newVinyl = new Vinyl(data);
+            const newVinyl = new Vinyl(data);
             $('#genres').html("");
             if (newVinyl.genres.length > 0) {
-                let genre_html = '<ul class="list-group">';
+                let genreHtml = '<ul class="list-group">';
                 for (let i = 0; i < newVinyl.genres.length; i++) {
-                    let genre_html = newVinyl.genres[i].formatItem();
-                    $('#genres').append(genre_html);
+                    genreHtml += newVinyl.genres[i].formatItem();
+                    $('#genres').append(genreHtml);
                 };
-                genre_html += '</ul>';
+                genreHtml += '</ul>';
             } else {
                 $('#genres').html('Vinyl has no genres.');
             }
@@ -91,7 +91,7 @@ function attachEventListeners() {
 
     $('.js-new-vinyl-form').submit(function(e) {
         e.preventDefault();
-        let values = $(this).serialize();
+        const values = $(this).serialize();
         $('.alert').hide();
         $.ajax({
             type: 'POST',
@@ -99,17 +99,17 @@ function attachEventListeners() {
             url: '/vinyls/',
             dataType: 'json'
         }).done(function(data) {
-            let newVinyl = new Vinyl(data);
-            let div_html = newVinyl.formatIndex();
-            $('#vinyls_table').append(div_html);
+            const newVinyl = new Vinyl(data);
+            const divHtml = newVinyl.formatIndex();
+            $('#vinyls_table').append(divHtml);
         }).error(function(e) {
-            let err = JSON.parse(e.responseText);
+            const err = JSON.parse(e.responseText);
             $('.alert').show();
-            let error_html = "";
+            const errorHtml = "";
             $.each(err.errors, function(index, value) {
-                error_html += value + '<br>';
+                errorHtml += value + '<br>';
             });
-            $('.alert').html(error_html);
+            $('.alert').html(errorHtml);
         });
     });
 
@@ -120,9 +120,9 @@ function attachEventListeners() {
             this.title = vinyl.title;
             this.price = vinyl.price;
             this.inventory = vinyl.inventory;
-            this.for_sale = vinyl.for_sale;
-            this.artist_id = vinyl.artist.id;
-            this.artist_name = vinyl.artist.name;
+            this.forSale = vinyl.forSale;
+            this.artistId = vinyl.artist.id;
+            this.artistName = vinyl.artist.name;
             let genres = [];
             vinyl.genres.forEach(function(genre) {
                 let newGenre = new Genre(genre);
@@ -132,17 +132,17 @@ function attachEventListeners() {
         }
         
         formatIndex() {
-            let base_url = 'http://localhost:3000';
-            let vinyl_html = `<tr id='vinyl_${this.id}'>`;
-            vinyl_html += `<th scope="row"><a href="${base_url}/artists/${this.artist_id}">${this['artist_name']}</a></th>`;
-            vinyl_html += `<th scope="row"><a href="${base_url}/vinyls/${this['id']}">${this['title']}</a></th>`;
-            vinyl_html += '<th scope="row">' + this.formatPrice() +'</th>';
-            vinyl_html += '<th scope="row">' + this['inventory'] +'</th>';
-            vinyl_html += '<th scope="row">' + this.formatForSale() +'</th>';
-            vinyl_html += `<th scope="row"><a href="${base_url}/vinyls/${this.id}/edit">Edit</a></th>`;
-            vinyl_html += `<th scope="row"><a href="#" id=${this.id} class="delete_vinyl">Delete</a></th>`;
-            vinyl_html += '</tr>';
-            return vinyl_html;
+            const baseUrl = 'http://localhost:3000';
+            let vinylHtml = `<tr id='vinyl_${this.id}'>`;
+            vinylHtml += `<th scope="row"><a href="${baseUrl}/artists/${this.artistId}">${this['artistName']}</a></th>`;
+            vinylHtml += `<th scope="row"><a href="${baseUrl}/vinyls/${this['id']}">${this['title']}</a></th>`;
+            vinylHtml += '<th scope="row">' + this.formatPrice() +'</th>';
+            vinylHtml += '<th scope="row">' + this['inventory'] +'</th>';
+            vinylHtml += '<th scope="row">' + this.formatForSale() +'</th>';
+            vinylHtml += `<th scope="row"><a href="${baseUrl}/vinyls/${this.id}/edit">Edit</a></th>`;
+            vinylHtml += `<th scope="row"><a href="#" id=${this.id} class="delete_vinyl">Delete</a></th>`;
+            vinylHtml += '</tr>';
+            return vinylHtml;
         }
     
         formatPrice() {
@@ -150,7 +150,7 @@ function attachEventListeners() {
         }
     
         formatForSale() {
-            return (this.for_sale === true) ? "y" : "n";
+            return (this.forSale === true) ? "y" : "n";
         }
     };
 
@@ -160,8 +160,8 @@ function attachEventListeners() {
             this.name = genre.name;
         }
         formatItem() {
-            let genre_html = `<li class="list-group-item">${this.name}</li>`
-            return genre_html;
+            let genreHtml = `<li class="list-group-item">${this.name}</li>`
+            return genreHtml;
         }
     };
 
