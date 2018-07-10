@@ -43,16 +43,20 @@ function attachEventListeners() {
         return false;
     };
 
-    
-    function loadNextVinyl() {
-        // if first item, get id from url and store in hidden div
+    function getCurrentVinylId() {
         let currentId = $("#current_vinyl_id").html();
+        // if first item, get id from url and store in hidden div
         if (currentId == 0) {
             const url = window.location.href;
             const id = url.split("/").pop();
             $("#current_vinyl_id").html(id);
             currentId = $("#current_vinyl_id").html();
         }
+        return currentId;
+    };
+
+    function loadNextVinyl() {        
+        const currentId = getCurrentVinylId();
 
         $('#genres').hide();
         $.ajax({
@@ -68,7 +72,8 @@ function attachEventListeners() {
 
     function loadGenres() {
         $('#genres').show();
-        const vinylId = $("#current_vinyl_id").html();
+        const vinylId = getCurrentVinylId();
+        
         $.ajax({
             type: 'GET',
             url: `/vinyls/${vinylId}.json`
@@ -78,7 +83,7 @@ function attachEventListeners() {
             if (newVinyl.genres.length > 0) {
                 let genreHtml = '<ul class="list-group">';
                 for (let i = 0; i < newVinyl.genres.length; i++) {
-                    genreHtml += newVinyl.genres[i].formatItem();
+                    let genreHtml = newVinyl.genres[i].formatItem();
                     $('#genres').append(genreHtml);
                 };
                 genreHtml += '</ul>';
