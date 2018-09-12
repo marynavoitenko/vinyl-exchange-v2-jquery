@@ -125,7 +125,7 @@ function attachEventListeners() {
             this.title = vinyl.title;
             this.price = vinyl.price;
             this.inventory = vinyl.inventory;
-            this.forSale = vinyl.forSale;
+            this.forSale = vinyl.for_sale;
             this.artistId = vinyl.artist.id;
             this.artistName = vinyl.artist.name;
             let genres = [];
